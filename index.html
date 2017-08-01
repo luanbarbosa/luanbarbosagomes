@@ -13,6 +13,26 @@
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
 		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+		<style type="text/css">
+		    a:hover, a:active, a:focus, a:link, a:visited {
+			  outline: 0;
+			  outline: 0 !important;
+			  outline-style:none;
+			}
+			button, object, embed { 
+			  outline: 0;
+			}
+
+			/* All Input elements */
+			input::-moz-focus-inner { 
+			 outline: 0; 
+			}
+
+			/* Or more specifically*/
+			input[type="submit"]::-moz-focus-inner, input[type="button"]::-moz-focus-inner{
+			  outline: 0;
+			}
+		</style>
 	</head>
 	<body class="landing">
 
@@ -22,29 +42,13 @@
 				<!-- Header -->
 					<header id="header" class="alt">
 						<h1><a href="index.html">Luan Barbosa Gomes</a></h1>
-						<nav id="nav">
-							<ul>
-								<li class="special">
-									<a href="#menu" class="menuToggle"><span>Menu</span></a>
-									<div id="menu">
-										<ul>
-											<li><a href="droneinfo.html">Droneinfo</a></li>
-											<li><a href="hifk.html">HIFK</a></li>
-											<li><a href="brasilprev.html">Brasilprev</a></li>
-											<li><a href="walkmate.html">Walkmate</a></li>
-											<li><a href="alarm.html">Alarm</a></li>
-										</ul>
-									</div>
-								</li>
-							</ul>
-						</nav>
 					</header>
 
 				<!-- Banner -->
 					<section id="banner">
 						<div class="inner">
 							<h2>Luan Barbosa Gomes</h2>
-							<p>Bachelor of Computer Science</p><p>Android Developer</p><p>Gamer under constant training  &#128513;</p>
+							<p>Bachelor of Computer Science</p><p>Android Developer</p>
 						</div>
 						<a href="#two" class="more scrolly">More info</a>
 					</section>
@@ -70,34 +74,63 @@
 					<section id="two" class="wrapper alt style2">
 						
 							<section class="spotlight">
-								<div class="image"><a href="droneinfo.html"><img src="images/droneinfo_thumbnail.jpg" alt="" /></a></div><div class="content">
+								<div class="image"><img src="images/droneinfo_thumbnail.jpg" alt="" /></div><div class="content">
 									<h2>Droneinfo</h2>
-									<p>App developed for the Finnish Transport Safety Agency.</p>
+									<p>Application developed for the Finnish Transport Safety Agency (<a href="https://www.trafi.fi/en" target="_blank">Trafi</a>).</p>
+									<p>The app was developed at <a href="http://www.starcut.com" target="_blank">Starcut</a>. I was the lead Android developer for this project.</p>
+									<a href="https://play.google.com/store/apps/details?id=fi.trafi.droneinfo&utm_source=global_co&utm_medium=prtnr&utm_content=Mar2515&utm_campaign=PartBadge&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1" target="_blank">
+
+										<img alt="Get it on Google Play" src="https://play.google.com/intl/en_us/badges/images/apps/en-play-badge.png"
+										height="56" width="190"/>
+									</a>
+
 								</div>
 							</section>
 						
 						<section class="spotlight">
-							<div class="image"><a href="hifk.html"><img src="images/hifk_thumbnail.jpg" alt="" /></a></div><div class="content">
+							<div class="image"><img src="images/hifk_thumbnail.jpg" alt="" /></div><div class="content">
 								<h2>HIFK</h2>
-								<p>App for HIFK - Finnish hockey team.</p>
+								<p>HIFK is a Finnish hockey team. I participated in the development of the Android version of the application.</p>
+								<p>The app was developed at <a href="http://www.starcut.com" target="_blank">Starcut</a>.</p>
+								<a href="https://play.google.com/store/apps/details?id=com.starcut.taskupeto&utm_source=global_co&utm_medium=prtnr&utm_content=Mar2515&utm_campaign=PartBadge&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1" target="_blank">
+
+									<img alt="Get it on Google Play" src="https://play.google.com/intl/en_us/badges/images/apps/en-play-badge.png"
+									height="56" width="190"/>
+								</a>
 							</div>
 						</section>
 						<section class="spotlight">
-							<div class="image"><a href="brasilprev.html"><img src="images/brasilprev_thumbnail.jpg" alt="" /></a></div><div class="content">
+							<div class="image"><img src="images/brasilprev_thumbnail.jpg" alt="" /></div><div class="content">
 								<h2>Brasilprev</h2>
-								<p>App for a major Brazilian bank.</p>
+								<p>App for a major Brazilian bank. I participated in the development of this application as a freelancer when the app needed to be published in a tight deadline.</p>
+
+								<a href="https://play.google.com/store/apps/details?id=app.mobilife.brasilprev&utm_source=global_co&utm_medium=prtnr&utm_content=Mar2515&utm_campaign=PartBadge&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1" target="_blank">
+									<img alt="Get it on Google Play" src="https://play.google.com/intl/en_us/badges/images/apps/en-play-badge.png"
+									height="56" width="190"/>
+								</a>
 							</div>
 						</section>
 						<section class="spotlight">
-							<div class="image"><a href="walkmate.html"><img src="images/walkmate_thumbnail.jpg" alt="" /></a></div><div class="content">
+							<div class="image"><img src="images/walkmate_thumbnail.jpg" alt="" /></div><div class="content">
 								<h2>Walkmate</h2>
-								<p>Sony Mobile exercise companion app.</p>
+								<p>Exercise companion app developed for Sony Mobile Communications.</p>
+								<p>This app was developed at <a href="http://www.venturus.org.br/site/" target="_blank">Venturus Innovation & Technology Center</a>. While I was participating in a 3 months internship program. I was in the stability team for the version v10.01.04.</p>
+
+								<a href="https://play.google.com/store/apps/details?id=com.sonymobile.androidapp.walkmate&hl=en&utm_source=global_co&utm_medium=prtnr&utm_content=Mar2515&utm_campaign=PartBadge&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1" target="_blank">
+									<img alt="Get it on Google Play" src="https://play.google.com/intl/en_us/badges/images/apps/en-play-badge.png"
+									height="56" width="190"/>
+								</a>
 							</div>
 						</section>
 						<section class="spotlight">
 							<div class="image"><a href="alarm.html"><img src="images/alarm_thumbnail.jpg" alt="" /></a></div><div class="content">
 								<h2>Alarm</h2>
-								<p>Personal app.</p>
+								<p>Application developed as a personal project.</p>
+
+								<a href="https://play.google.com/store/apps/details?id=com.luanbarbosa.awesomealarm&utm_source=global_co&utm_medium=prtnr&utm_content=Mar2515&utm_campaign=PartBadge&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1" target="_blank">
+									<img alt="Get it on Google Play" src="https://play.google.com/intl/en_us/badges/images/apps/en-play-badge.png"
+									height="56" width="190"/>
+								</a>
 							</div>
 						</section>
 					</section>
@@ -120,20 +153,19 @@
 									<h3>Firebase</h3>
 									<h3>Scrum</h3>
 									<h3>System Modeling</h3>
-									<h6>And a little of averything else (Python, Ruby, JavaScript, Go...)</h6>
 								</li>
 							</ul>
 						</div>
 					</section>
 
 				<!-- CTA -->
-					<section id="cta" class="wrapper style4">
+					<section id="three" class="wrapper special">
 						<div class="inner">
 							<header>
 								<h2>Some personal info</h2>
 								<p>I am a Brazilian living in Helsinki, Finland (who needs the sun anyway &#128516; )</p>
 								<p>Here is a video of one of my favorite YouTube channels "Kurzgesagt – In a Nutshell"</p>
-								<iframe width="100%" height="315" src="https://www.youtube.com/embed/MBRqu0YOH14" frameborder="0" allowfullscreen></iframe>
+								<iframe width="100%" height="500" src="https://www.youtube.com/embed/MBRqu0YOH14" frameborder="0" allowfullscreen></iframe>
 							</header>
 						</div>
 					</section>
