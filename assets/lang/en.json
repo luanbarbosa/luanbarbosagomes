@@ -1,0 +1,53 @@
+{
+  "title": "Luan Barbosa Gomes",
+  "name": "Luan Barbosa Gomes",
+  "subtitle": "Senior Android Developer",
+  "more_info": "More info",
+  "technical_experience": "Technical Experience",
+  "android_title": "Android",
+  "android_experience": "10+ years of professional experience in Android development.",
+  "everyday_use_title": "Everyday use:",
+  "everyday_use_1": "Kotlin (Jetpack Compose, Coroutines, Flows, Room, etc.)",
+  "everyday_use_2": "Firebase Services (Remote Config, Analytics, App distribution, etc.)",
+  "everyday_use_3": "Project organization (Jira, Confluence, Trello, Kanban, etc.)",
+
+  "sanoma_title": "News apps",
+  "sanoma_desc1": "In-house Senior Android developer in the team responsible for developing a new platform to generate 15+ distinct news apps for Sanoma Media Finland brands",
+  "sanoma_desc2": "Using the latest technologies (including Jetpack Compose) to build better apps for our customers",
+
+  "nordea_wallet_title": "Wallet",
+  "nordea_wallet_desc1": "In-house Senior IT developer on the Mobile and Emerging Payments team at Nordea bank",
+  "nordea_wallet_desc2": "Responsible for the continuous development and maintenance of the Android application",
+
+  "siirto_title": "Siirto",
+  "siirto_desc1": "In-house Senior IT developer on the Mobile and Emerging Payments team at Nordea bank",
+  "siirto_desc2": "Part of the team responsible for the architectural and UI redesign for the 3.0 version",
+
+  "travel_app_title": "Travel App",
+  "travel_app_desc1": "In-house Senior Android Developer on the digital solutions team responsible for the continuous development and maintenance of the travel companion app",
+  "travel_app_highlight_html": "<i>Highlight:</i> Implementation of the \"Advance Seat Reservation\"",
+
+  "sports_results_title": "Sports results",
+  "sports_results_desc1": "Development of the sports results app for Iltalehti media group as a consultant",
+  "sports_results_desc2_html": "Android developer consultant on behalf of Starcut (now <u><a href=\"https://digia.com/en/\" target=\"_blank\">Digia</a></u>)",
+
+  "droneinfo_title": "Droneinfo",
+  "droneinfo_desc1": "Drone flight notification and information developed for the Finnish Transport Safety Agency - Traficom as a consultant",
+  "droneinfo_desc2_html": "Android developer consultant on behalf of Starcut (now <u><a href=\"https://digia.com/en/\" target=\"_blank\">Digia</a></u>)",
+
+  "hifk_title": "HIFK",
+  "hifk_desc1": "Helsinki hockey team app developed for HIFK",
+  "hifk_desc2_html": "Android developer consultant on behalf of Starcut (now <u><a href=\"https://digia.com/en/\" target=\"_blank\">Digia</a></u>)",
+
+  "walkmate_title": "Walkmate",
+  "walkmate_desc1": "Exercise companion app developed for Sony Mobile Communications",
+  "walkmate_desc2": "Participation in a 3-month internship program focused on stability improvements",
+  "walkmate_desc3_html": "Developed on behalf of <u><a href=\"https://www.venturus.org.br/en/\" target=\"_blank\">Venturus</a></u>",
+
+  "footer_github": "Github",
+  "footer_linkedin": "Linkedin",
+  "footer_email": "Email",
+  "footer_copyright": "©luanbarbosagomes. All rights reserved",
+  "footer_design_html": "Design: <a href=\"http://html5up.net\">HTML5 UP</a>"
+}
+
