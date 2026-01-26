@@ -398,6 +398,19 @@ header.major{margin:0 0 3.5em 0;}
 header.major h2, header.major h3, header.major h4, header.major h5, header.major h6{border-bottom:solid 2px #fff;display:inline-block;padding-bottom:1em;position:relative;}
 header.major h2:after, header.major h3:after, header.major h4:after, header.major h5:after, header.major h6:after{content:'';display:block;height:1px;}
 header.major p{color:#fff;top:0;}
+
+/* companies grid removed */
+
+/* Cap number of columns on wider screens so items form multiple rows */
+@media screen and (min-width:980px){
+	.logo-track{grid-template-columns:repeat(3,1fr)}
+}
+@media screen and (min-width:1280px){
+	.logo-track{grid-template-columns:repeat(4,1fr)}
+}
+@media screen and (min-width:1680px){
+	.logo-track{grid-template-columns:repeat(5,1fr)}
+}
 @media screen and (max-width:736px){header.major{margin:0 0 2em 0;}
 }
 @media screen and (max-width:980px){header br{display:none;}
@@ -609,9 +622,17 @@ button,
 .features li:first-child{border-top:0;}
 }
 .spotlight{-moz-align-items:center;-webkit-align-items:center;-ms-align-items:center;align-items:center;display:-moz-flex;display:-webkit-flex;display:-ms-flex;display:flex;}
-.spotlight .image{-moz-order:1;-webkit-order:1;-ms-order:1;order:1;border-radius:0;width:40%;}
-.spotlight .image img{border-radius:0;width:100%;}
+.spotlight{position:relative}
+.spotlight .image{-moz-order:1;-webkit-order:1;-ms-order:1;order:1;border-radius:0;width:40%;display:flex;align-items:center;justify-content:center}
+.spotlight .image img{border-radius:0;width:auto;max-width:100%;height:auto;}
 .spotlight .content{padding:2em 4em 0.1em 4em;-moz-order:2;-webkit-order:2;-ms-order:2;order:2;max-width:48em;width:60%;}
+.spotlight:not(:has(.image)) .content,
+#carousel .content{width:100%;max-width:none;padding:1.25rem 1rem 0 1rem}
+
+@media screen and (min-width:980px){
+	/* Align carousel title/content with other .spotlight sections on desktop */
+	#carousel .content{padding:2em 4em 0.1em 4em}
+}
 .spotlight:nth-child(2n){-moz-flex-direction:row-reverse;-webkit-flex-direction:row-reverse;-ms-flex-direction:row-reverse;flex-direction:row-reverse;}
 .spotlight:nth-child(1){background-color:rgba(0, 0, 0, 0.075);}
 .spotlight:nth-child(2){background-color:rgba(0, 0, 0, 0.15);}
@@ -631,6 +652,38 @@ button,
 .spotlight .image{width:100%;}
 .spotlight .content{padding:4em 3em 2em 3em;max-width:none;text-align:center;width:100%;}
 }
+
+/* Brand badge styles.
+   Default: inline badge placed next to the section title inside `.content`.
+   Backwards-compatible rule keeps the absolute corner badge if placed as a
+   direct child of `.spotlight` (unchanged behavior). */
+.section-badge{
+	display:inline-flex;align-items:center;justify-content:center;
+	height:48px;min-width:92px;padding:0 12px;border-radius:6px;background:#ffffff;
+	box-shadow:0 6px 18px rgba(0,0,0,0.12);border:1px solid rgba(0,0,0,0.06);
+	margin-right:0.9rem;vertical-align:middle;overflow:hidden;
+	text-decoration:none;color:inherit;cursor:pointer;
+}
+.section-badge img{height:60%;width:auto;object-fit:contain;display:block;margin:0 auto}
+.section-badge .label{display:none;font-weight:700;color:#222}
+
+/* If the badge is a direct child of .spotlight keep previous corner placement */
+.spotlight > .section-badge{position:absolute;top:1.25rem;right:1.25rem;width:64px;height:64px;z-index:5}
+
+@media screen and (max-width:736px){
+	.section-badge{width:40px;height:40px;margin-right:0.6rem;padding:4px}
+	.spotlight > .section-badge{width:48px;height:48px;top:0.75rem;right:0.75rem}
+}
+
+/* Inline title row: badge + title on one line */
+.section-title{display:flex;align-items:center;gap:0.9rem;margin-bottom:0.5rem}
+.section-title > p{margin:0}
+
+@media screen and (max-width:980px){
+	.section-title{justify-content:center;}
+	.section-title > p{margin:0 0 0 0.6rem;text-align:center}
+}
+
 @media screen and (max-width:736px){.spotlight .content{padding:3em 2em 1em 2em;}
 }
 .wrapper{padding:6em 0 4em 0;}
@@ -837,6 +890,9 @@ body.is-menu-visible #menu{-moz-transform:translateX(0);-webkit-transform:transl
 #header.alt{background:transparent;}
 #header.alt h1{-moz-pointer-events:none;-webkit-pointer-events:none;-ms-pointer-events:none;pointer-events:none;opacity:0;}
 #banner{display:-moz-flex;display:-webkit-flex;display:-ms-flex;display:flex;-moz-flex-direction:column;-webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column;-moz-justify-content:center;-webkit-justify-content:center;-ms-justify-content:center;justify-content:center;cursor:default;height:100vh;min-height:35em;overflow:hidden;position:relative;text-align:center;}
+
+/* Reserve bottom space so the .inner block centers above the companies grid and More action */
+#banner{padding-bottom:18em}
 #banner h2{-moz-transform:scale(1);-webkit-transform:scale(1);-ms-transform:scale(1);transform:scale(1);-moz-transition:-moz-transform 0.5s ease, opacity 0.5s ease;-webkit-transition:-webkit-transform 0.5s ease, opacity 0.5s ease;-ms-transition:-ms-transform 0.5s ease, opacity 0.5s ease;transition:transform 0.5s ease, opacity 0.5s ease;display:inline-block;font-size:1.75em;opacity:1;padding:0.35em 1em;position:relative;z-index:1;}
 #banner h2:before, #banner h2:after{-moz-transition:width 0.85s ease;-webkit-transition:width 0.85s ease;-ms-transition:width 0.85s ease;transition:width 0.85s ease;-moz-transition-delay:0.25s;-webkit-transition-delay:0.25s;-ms-transition-delay:0.25s;transition-delay:0.25s;background:#fff;content:'';display:block;height:2px;position:absolute;width:100%;}
 #banner h2:before{top:0;left:0;}
