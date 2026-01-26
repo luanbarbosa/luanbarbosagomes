@@ -399,40 +399,7 @@ header.major h2, header.major h3, header.major h4, header.major h5, header.major
 header.major h2:after, header.major h3:after, header.major h4:after, header.major h5:after, header.major h6:after{content:'';display:block;height:1px;}
 header.major p{color:#fff;top:0;}
 
-/* Companies grid (replaces marquee/carousel) */
-.logo-marquee{padding:0.25rem 0.5rem;margin:0.5rem auto 1.25rem;background:transparent;border-top:0;border-bottom:0;max-width:1100px}
-.logo-track{display:grid;grid-template-columns:repeat(auto-fit,minmax(80px,1fr));gap:0.6rem;align-items:stretch;width:100%;grid-auto-rows:72px}
-.logo-item{height:100%;background:#ffffff;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#222;font-weight:700;letter-spacing:0.02em;box-shadow:0 4px 12px rgba(34,34,34,0.06);border:1px solid rgba(0,0,0,0.06);padding:0.25rem;box-sizing:border-box;margin:0}
-.logo-item a{display:flex;align-items:center;justify-content:center;width:100%;height:100%}
-.logo-item img{max-height:40px;max-width:85%;object-fit:contain;display:block;margin:0 auto}
-
-@media screen and (max-width:736px){
-	.logo-track{grid-template-columns:repeat(auto-fit,minmax(70px,1fr));gap:0.5rem;grid-auto-rows:56px}
-	.logo-item{height:100%;font-size:0.78em;padding:0.2rem}
-	.logo-item img{max-height:32px}
-}
-
-/* Ensure at least two columns on very narrow screens by forcing two flexible columns */
-@media screen and (max-width:480px){
-	.logo-track{grid-template-columns:repeat(2,1fr);gap:0.4rem;grid-auto-rows:48px}
-	.logo-item{height:100%;padding:0.15rem}
-	.logo-item img{max-height:28px}
-}
-
-/* Banner-specific compact layout: force a single tight horizontal row and allow horizontal scroll on narrow screens */
-.banner-companies{position:absolute;left:0;right:0;bottom:9em;display:flex;flex-direction:column;align-items:center;justify-content:center;pointer-events:auto}
-.banner-companies .logo-marquee{padding:0;margin:0 auto;max-width:1200px;width:100%;}
-.banner-companies .logo-track{display:flex;flex-wrap:wrap;justify-content:center;gap:0.7rem;align-items:center;padding:0 0.5rem;width:100%;}
-.banner-companies .logo-item{display:flex;align-items:center;justify-content:center;flex:0 1 120px;height:56px;border-radius:6px;padding:0.12rem;margin:0;box-shadow:0 4px 12px rgba(34,34,34,0.06);}
-.banner-companies .logo-item img{max-height:40px;max-width:90%}
-.banner-companies .logo-track::-webkit-scrollbar{height:6px}
-.banner-companies .logo-track::-webkit-scrollbar-thumb{background:rgba(0,0,0,0.08);border-radius:3px}
-.banner-companies p{margin:0 0 0.15rem;text-align:center}
-
-@media screen and (max-width:736px){
-	/* Hide the companies grid entirely on small screens */
-	.banner-companies{display:none !important}
-}
+/* companies grid removed */
 
 /* Cap number of columns on wider screens so items form multiple rows */
 @media screen and (min-width:980px){
@@ -655,6 +622,7 @@ button,
 .features li:first-child{border-top:0;}
 }
 .spotlight{-moz-align-items:center;-webkit-align-items:center;-ms-align-items:center;align-items:center;display:-moz-flex;display:-webkit-flex;display:-ms-flex;display:flex;}
+.spotlight{position:relative}
 .spotlight .image{-moz-order:1;-webkit-order:1;-ms-order:1;order:1;border-radius:0;width:40%;display:flex;align-items:center;justify-content:center}
 .spotlight .image img{border-radius:0;width:auto;max-width:100%;height:auto;}
 .spotlight .content{padding:2em 4em 0.1em 4em;-moz-order:2;-webkit-order:2;-ms-order:2;order:2;max-width:48em;width:60%;}
@@ -684,6 +652,38 @@ button,
 .spotlight .image{width:100%;}
 .spotlight .content{padding:4em 3em 2em 3em;max-width:none;text-align:center;width:100%;}
 }
+
+/* Brand badge styles.
+   Default: inline badge placed next to the section title inside `.content`.
+   Backwards-compatible rule keeps the absolute corner badge if placed as a
+   direct child of `.spotlight` (unchanged behavior). */
+.section-badge{
+	display:inline-flex;align-items:center;justify-content:center;
+	height:48px;min-width:92px;padding:0 12px;border-radius:6px;background:#ffffff;
+	box-shadow:0 6px 18px rgba(0,0,0,0.12);border:1px solid rgba(0,0,0,0.06);
+	margin-right:0.9rem;vertical-align:middle;overflow:hidden;
+	text-decoration:none;color:inherit;cursor:pointer;
+}
+.section-badge img{height:60%;width:auto;object-fit:contain;display:block;margin:0 auto}
+.section-badge .label{display:none;font-weight:700;color:#222}
+
+/* If the badge is a direct child of .spotlight keep previous corner placement */
+.spotlight > .section-badge{position:absolute;top:1.25rem;right:1.25rem;width:64px;height:64px;z-index:5}
+
+@media screen and (max-width:736px){
+	.section-badge{width:40px;height:40px;margin-right:0.6rem;padding:4px}
+	.spotlight > .section-badge{width:48px;height:48px;top:0.75rem;right:0.75rem}
+}
+
+/* Inline title row: badge + title on one line */
+.section-title{display:flex;align-items:center;gap:0.9rem;margin-bottom:0.5rem}
+.section-title > p{margin:0}
+
+@media screen and (max-width:980px){
+	.section-title{justify-content:center;}
+	.section-title > p{margin:0 0 0 0.6rem;text-align:center}
+}
+
 @media screen and (max-width:736px){.spotlight .content{padding:3em 2em 1em 2em;}
 }
 .wrapper{padding:6em 0 4em 0;}
