@@ -50,21 +50,30 @@
 							<h2>Luan Barbosa Gomes</h2>
 							<p style="font-size: large;">Senior Android Developer</p>
 						</div>
+							<!-- Companies grid moved here to sit just above the More info link -->
+							<div class="banner-companies" style="margin:0.05rem auto 0;">
+								<div class="logo-marquee" role="group" aria-label="Logos of companies I've worked with">
+								<div class="logo-track">
+									<div class="logo-item"><a class="scrolly" href="#sanoma"><img src="images/sanoma-logo.png" alt="Sanoma logo"></a></div>
+									<div class="logo-item"><a class="scrolly" href="#nordea"><img src="images/nordea-logo.png" alt="Nordea logo"></a></div>
+									<div class="logo-item"><a class="scrolly" href="#finnair"><img src="images/finnair-logo.png" alt="Finnair logo"></a></div>
+									<div class="logo-item"><a class="scrolly" href="#iltalehti"><img src="images/iltalehti-logo.png" alt="Iltalehti logo"></a></div>
+									<div class="logo-item"><a class="scrolly" href="#traficom"><img src="images/traficom-logo.png" alt="Traficom logo"></a></div>
+									<div class="logo-item"><a class="scrolly" href="#hifk"><img src="images/hifk-logo.png" alt="HIFK logo"></a></div>
+									<div class="logo-item"><a class="scrolly" href="#sony"><img src="images/sony-logo.png" alt="Sony logo"></a></div>
+									<div class="logo-item"><a class="scrolly" href="#venturus"><img src="images/venturus-logo.png" alt="Venturus logo"></a></div>
+								</div>
+							</div>
+						</div>
 						<a href="#two" class="more scrolly">More info</a>
 					</section>
 
 				<!-- Two -->
 					<section id="two" class="wrapper alt style2">
 						
-						<section class="spotlight">
-							<div class="image" ><img id="myImg" src="images/ink-apps-audio.png" alt="" style="background-color: white;" /></div>
-							<div class="content" style="font-size: large;">
-								<p style="font-size: xx-large;">Audio features</p>
-								<p>New Audio content for <u><a href="https://www.hs.fi/" target="_blank">Helsingin Sanomat</a></u> users and other Sanoma news brands</p>
-							</div>
-						</section>
 
-						<section class="spotlight">
+
+						<section id="sanoma" class="spotlight">
 							<div class="image" ><img id="myImg" src="images/ink-apps.png" alt="" style="background-color: white;" /></div>
 							<div class="content" style="font-size: large;">
 								<p style="font-size: xx-large;">Sanoma News Apps</p>
@@ -73,7 +82,7 @@
 							</div>
 						</section>
 
-						<section class="spotlight">
+						<section id="nordea" class="spotlight">
 							<div class="image" ><img src="images/nordea_wallet_thumbnail.jpg" alt="" /></div>
 							<div class="content" style="font-size: large;">
 								<p style="font-size: xx-large;">Nordea Wallet</p>
@@ -95,7 +104,7 @@
 							</div>
 						</section>
 
-						<section class="spotlight">
+							<section id="finnair" class="spotlight">
 							<div class="image"><img src="images/finnair_thumbnail.jpg" alt="" /></div>
 							<div class="content" style="font-size: large;">
 								<p style="font-size: xx-large;">Finnair</p>
@@ -105,7 +114,7 @@
 							</div>
 						</section>
 
-							<section class="spotlight">
+							<section id="iltalehti" class="spotlight">
 								<div class="image"><img src="images/ilsports_thumbnail.jpg" alt="" /></div>
 								<div class="content" style="font-size: large;">
 									<p style="font-size: xx-large;">IL Tulosvahti</p>
@@ -115,17 +124,17 @@
 								</div>
 							</section>
 
-							<section class="spotlight">
+							<section id="traficom" class="spotlight">
 								<div class="image"><img src="images/droneinfo_thumbnail.jpg" alt="" /></div>
 								<div class="content" style="font-size: large;">
 									<p style="font-size: xx-large;">Droneinfo</p>
-									<p>Drone flight notification and information developed for the Finnish Transport Safety Agency - <u><a href="https://www.trafi.fi/en" target="_blank">Trafi</a></u></p>
+									<p>Drone flight notification and information developed for the Finnish Transport Safety Agency - <u><a href="https://www.trafi.fi/en" target="_blank">Traficom</a></u></p>
 									<p>Android developer for this project</p>
 									<p>Developed at Starcut (now <u><a href="https://digia.com/en/actual/news/mobile-developer-starcut-joins-digia-bolstering-mobile-services/" target="_blank">Digia</a></u>)</p>
 								</div>
 							</section>
 						
-						<section class="spotlight">
+						<section id="hifk" class="spotlight">
 							<div class="image"><img src="images/hifk_thumbnail.jpg" alt="" /></div>
 							<div class="content" style="font-size: large;">
 								<p style="font-size: xx-large;">HIFK</p>
@@ -134,7 +143,7 @@
 								<p>The app was developed at Starcut (now <u><a href="https://digia.com/en/actual/news/mobile-developer-starcut-joins-digia-bolstering-mobile-services/" target="_blank">Digia</a></u>)</p>
 							</div>
 						</section>
-						<section class="spotlight">
+						<section id="sony" class="spotlight">
 							<div class="image"><img src="images/walkmate_thumbnail.jpg" alt="" /></div>
 							<div class="content" style="font-size: large;">
 								<p style="font-size: xx-large;">Walkmate</p>
@@ -145,6 +154,7 @@
 						</section>
 					</section>
 
+
 				<!-- Three -->
 					<section id="three" class="wrapper style3 special">
 						<div class="inner">
@@ -154,12 +164,13 @@
 							<ul class="features">
 								<li class="icon icon fa-code">
 									<h3>Android</h3>
-									<p>9+ years of professional experience in Android development.</p>
+									<p>10+ years of professional experience in Android development.</p>
 								</li>
 								<li class="icon fa-laptop">
 									<h3>Everyday use:</h3>
-									<p>Kotlin (Jetpack Compose ❤️, Coroutines, Flows, etc.)</p>
+									<p>Kotlin (Jetpack Compose, Coroutines, Flows, Room, etc.)</p>
 									<p>Firebase Services (Remote Config, Analytics, App distribution, etc.)</p>
+									<p>Project organization (Jira, Confluence, Trello, Kanban, etc.)</p>
 								</li>
 							</ul>
 						</div>
@@ -184,7 +195,7 @@
 				<!-- Footer -->
 					<footer id="footer">
 						<ul class="icons">
-							<li><a href="https://github.com/luanbarbosa-sanoma" class="icon fa-github"><span class="label">Github</span></a></li>
+							<li><a href="https://github.com/luanbarbosa" class="icon fa-github"><span class="label">Github</span></a></li>
 							<li><a href="https://www.linkedin.com/in/luan-barbosa-gomes/" class="icon fa-linkedin"><span class="label">Linkedin</span></a></li>
 							<li><a href="mailto:luanbarbosagomes@gmail.com" class="icon fa-envelope-o"><span class="label">Email</span></a></li>
 						</ul>
