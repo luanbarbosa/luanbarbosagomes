@@ -33,6 +33,12 @@
 			  outline: 0;
 			}
 		</style>
+
+		<style>
+			#lang-selector { position: absolute; top: 12px; right: 24px; z-index: 50; }
+			.lang-select { background: transparent; border: 0; font-size: 20px; cursor: pointer; padding: 6px; border-radius: 4px; -webkit-appearance: none; appearance: none; }
+			.lang-select option { font-size: 18px; }
+		</style>
 	</head>
 	<body class="landing">
 
@@ -40,17 +46,23 @@
 			<div id="page-wrapper">
 
 				<!-- Header -->
-					<header id="header" class="alt">
-						<h1><a href="index.html">Luan Barbosa Gomes</a></h1>
+					<header id="header" class="alt" style="position:relative;">
+						<h1><a href="index.html"><span data-i18n="name">Luan Barbosa Gomes</span></a></h1>
+						<div id="lang-selector">
+							<select id="lang-select" class="lang-select" aria-label="Language selector">
+								<option value="en">🇬🇧</option>
+								<option value="pt">🇧🇷</option>
+							</select>
+						</div>
 					</header>
 
 				<!-- Banner -->
 					<section id="banner">
 						<div class="inner">
-							<h2>Luan Barbosa Gomes</h2>
-							<p style="font-size: large;">Senior Android Developer</p>
+							<h2 data-i18n="name">Luan Barbosa Gomes</h2>
+							<p style="font-size: large;" data-i18n="subtitle">Senior Android Developer</p>
 						</div>
-						<a href="#two" class="more scrolly">More info</a>
+						<a href="#two" class="more scrolly" data-i18n="more_info">More info</a>
 					</section>
 
 				<!-- Two -->
@@ -61,19 +73,19 @@
 						<section id="sanoma" class="spotlight">
 							<div class="image" ><img id="myImg" src="images/ink-apps.png" alt="" style="background-color: white;" /></div>
 							<div class="content" style="font-size: large;">
-								<div class="section-title"><a class="section-badge" href="https://www.sanoma.fi/en/" target="_blank" rel="noopener"><img src="images/sanoma-logo.png" alt="Sanoma"></a><p style="font-size: xx-large;">News apps</p></div>
-								<p>In-house Senior Android developer in the team responsible for developing a new platform to generate 15+ distinct news apps for Sanoma Media Finland brands</p>
-								<p>Using the latest technologies (including Jetpack Compose) to build better apps for our customers</p>
+									<div class="section-title"><a class="section-badge" href="https://www.sanoma.fi/en/" target="_blank" rel="noopener"><img src="images/sanoma-logo.png" alt="Sanoma"></a><p style="font-size: xx-large;" data-i18n="sanoma_title">News apps</p></div>
+									<p data-i18n="sanoma_desc1">In-house Senior Android developer in the team responsible for developing a new platform to generate 15+ distinct news apps for Sanoma Media Finland brands</p>
+									<p data-i18n="sanoma_desc2">Using the latest technologies (including Jetpack Compose) to build better apps for our customers</p>
 							</div>
 						</section>
 
 						<section id="nordea" class="spotlight">
 							<div class="image" ><img src="images/nordea_wallet_thumbnail.jpg" alt="" /></div>
 							<div class="content" style="font-size: large;">
-								<div class="section-title"><a class="section-badge" href="https://www.nordea.fi/en/" target="_blank" rel="noopener"><img src="images/nordea-logo.png" alt="Nordea"></a><p style="font-size: xx-large;">Wallet</p></div>
-								
-								<p>In-house Senior IT developer on the Mobile and Emerging Payments team at Nordea bank</p>
-								<p>Responsible for the continuous development and maintenance of the Android application</p>
+								<div class="section-title"><a class="section-badge" href="https://www.nordea.fi/en/" target="_blank" rel="noopener"><img src="images/nordea-logo.png" alt="Nordea"></a><p style="font-size: xx-large;" data-i18n="nordea_wallet_title">Wallet</p></div>
+						
+									<p data-i18n="nordea_wallet_desc1">In-house Senior IT developer on the Mobile and Emerging Payments team at Nordea bank</p>
+									<p data-i18n="nordea_wallet_desc2">Responsible for the continuous development and maintenance of the Android application</p>
 							</div>
 						</section>
 
@@ -81,58 +93,58 @@
 						<section class="spotlight">
 							<div class="image" ><img src="images/nordea_thumbnail.jpg" alt="" /></div>
 							<div class="content" style="font-size: large;">
-								<div class="section-title"><a class="section-badge" href="https://www.nordea.fi/en/" target="_blank" rel="noopener"><img src="images/nordea-logo.png" alt="Nordea"></a><p style="font-size: xx-large;">Siirto</p></div>
-								
-								<p>In-house Senior IT developer on the Mobile and Emerging Payments team at Nordea bank</p>
+								<div class="section-title"><a class="section-badge" href="https://www.nordea.fi/en/" target="_blank" rel="noopener"><img src="images/nordea-logo.png" alt="Nordea"></a><p style="font-size: xx-large;" data-i18n="siirto_title">Siirto</p></div>
+						
+									<p data-i18n="siirto_desc1">In-house Senior IT developer on the Mobile and Emerging Payments team at Nordea bank</p>
 
-								<p>Part of the team responsible for the architectural and UI redesign for the 3.0 version</p>
+									<p data-i18n="siirto_desc2">Part of the team responsible for the architectural and UI redesign for the 3.0 version</p>
 							</div>
 						</section>
 
 							<section id="finnair" class="spotlight">
 							<div class="image"><img src="images/finnair_thumbnail.jpg" alt="" /></div>
 							<div class="content" style="font-size: large;">
-								<div class="section-title"><a class="section-badge" href="https://www.finnair.com" target="_blank" rel="noopener"><img src="images/finnair-logo.png" alt="Finnair"></a><p style="font-size: xx-large;">Travel App</p></div>
+								<div class="section-title"><a class="section-badge" href="https://www.finnair.com" target="_blank" rel="noopener"><img src="images/finnair-logo.png" alt="Finnair"></a><p style="font-size: xx-large;" data-i18n="travel_app_title">Travel App</p></div>
 
-								<p>In-house Senior Android Developer on the digital solutions team responsible for the continuous development and maintenance of the travel companion app</p>
-								<p><i>Highlight:</i> Implementation of the "Advance Seat Reservation"</p>
+									<p data-i18n="travel_app_desc1">In-house Senior Android Developer on the digital solutions team responsible for the continuous development and maintenance of the travel companion app</p>
+									<p data-i18n-html="travel_app_highlight_html"><i>Highlight:</i> Implementation of the "Advance Seat Reservation"</p>
 							</div>
 						</section>
 
 							<section id="iltalehti" class="spotlight">
 								<div class="image"><img src="images/ilsports_thumbnail.jpg" alt="" /></div>
 								<div class="content" style="font-size: large;">
-									<div class="section-title"><a class="section-badge" href="https://www.iltalehti.fi/" target="_blank" rel="noopener"><img src="images/iltalehti-logo.png" alt="Iltalehti"></a><p style="font-size: xx-large;">Sports results</p></div>
-									<p>Development of the sports results app for Iltalehti media group as a consultant</p>
+									<div class="section-title"><a class="section-badge" href="https://www.iltalehti.fi/" target="_blank" rel="noopener"><img src="images/iltalehti-logo.png" alt="Iltalehti"></a><p style="font-size: xx-large;" data-i18n="sports_results_title">Sports results</p></div>
+									<p data-i18n="sports_results_desc1">Development of the sports results app for Iltalehti media group as a consultant</p>
 
-									<p>Android developer consultant on behalf of Starcut (now <u><a href="https://digia.com/en/" target="_blank">Digia</a></u>)</p>
+									<p data-i18n-html="sports_results_desc2_html">Android developer consultant on behalf of Starcut (now <u><a href="https://digia.com/en/" target="_blank">Digia</a></u>)</p>
 								</div>
 							</section>
 
 							<section id="traficom" class="spotlight">
 								<div class="image"><img src="images/droneinfo_thumbnail.jpg" alt="" /></div>
 								<div class="content" style="font-size: large;">
-									<div class="section-title"><a class="section-badge" href="https://www.trafi.fi/en" target="_blank" rel="noopener"><img src="images/traficom-logo.png" alt="Traficom"></a><p style="font-size: xx-large;">Droneinfo</p></div>
-									<p>Drone flight notification and information developed for the Finnish Transport Safety Agency - Traficom as a consultant</p>
-									<p>Android developer consultant on behalf of Starcut (now <u><a href="https://digia.com/en/" target="_blank">Digia</a></u>)</p>
+									<div class="section-title"><a class="section-badge" href="https://www.trafi.fi/en" target="_blank" rel="noopener"><img src="images/traficom-logo.png" alt="Traficom"></a><p style="font-size: xx-large;" data-i18n="droneinfo_title">Droneinfo</p></div>
+									<p data-i18n="droneinfo_desc1">Drone flight notification and information developed for the Finnish Transport Safety Agency - Traficom as a consultant</p>
+									<p data-i18n-html="droneinfo_desc2_html">Android developer consultant on behalf of Starcut (now <u><a href="https://digia.com/en/" target="_blank">Digia</a></u>)</p>
 								</div>
 							</section>
 						
 						<section id="hifk" class="spotlight">
 							<div class="image"><img src="images/hifk_thumbnail.jpg" alt="" /></div>
 							<div class="content" style="font-size: large;">
-								<div class="section-title"><a class="section-badge" href="https://www.hifk.fi/" target="_blank" rel="noopener"><img src="images/hifk-logo.png" alt="HIFK"></a><p style="font-size: xx-large;">HIFK</p></div>
-								<p>Helsinki hockey team app developed for HIFK</p>
-								<p>Android developer consultant on behalf of Starcut (now <u><a href="https://digia.com/en/" target="_blank">Digia</a></u>)</p>
+								<div class="section-title"><a class="section-badge" href="https://www.hifk.fi/" target="_blank" rel="noopener"><img src="images/hifk-logo.png" alt="HIFK"></a><p style="font-size: xx-large;" data-i18n="hifk_title">HIFK</p></div>
+								<p data-i18n="hifk_desc1">Helsinki hockey team app developed for HIFK</p>
+								<p data-i18n-html="hifk_desc2_html">Android developer consultant on behalf of Starcut (now <u><a href="https://digia.com/en/" target="_blank">Digia</a></u>)</p>
 							</div>
 						</section>
 						<section id="sony" class="spotlight">
 							<div class="image"><img src="images/walkmate_thumbnail.jpg" alt="" /></div>
 							<div class="content" style="font-size: large;">
-								<div class="section-title"><a class="section-badge" href="https://www.sony.com" target="_blank" rel="noopener"><img src="images/sony-logo.png" alt="Sony"></a><p style="font-size: xx-large;">Walkmate</p></div>
-								<p>Exercise companion app developed for Sony Mobile Communications</p>
-								<p>Participation in a 3-month internship program focused on stability improvements</p>
-								<p>Developed on behalf of <u><a href="https://www.venturus.org.br/en/" target="_blank">Venturus</a></u></p>
+								<div class="section-title"><a class="section-badge" href="https://www.sony.com" target="_blank" rel="noopener"><img src="images/sony-logo.png" alt="Sony"></a><p style="font-size: xx-large;" data-i18n="walkmate_title">Walkmate</p></div>
+								<p data-i18n="walkmate_desc1">Exercise companion app developed for Sony Mobile Communications</p>
+								<p data-i18n="walkmate_desc2">Participation in a 3-month internship program focused on stability improvements</p>
+								<p data-i18n-html="walkmate_desc3_html">Developed on behalf of <u><a href="https://www.venturus.org.br/en/" target="_blank">Venturus</a></u></p>
 							</div>
 						</section>
 					</section>
@@ -142,19 +154,19 @@
 					<section id="three" class="wrapper style3 special">
 						<div class="inner">
 							<header class="major">
-								<h2>Technical Experience</h2>
-							</header>
+									<h2 data-i18n="technical_experience">Technical Experience</h2>
+								</header>
 							<ul class="features">
 								<li class="icon icon fa-code">
-									<h3>Android</h3>
-									<p>10+ years of professional experience in Android development.</p>
-								</li>
+										<h3 data-i18n="android_title">Android</h3>
+										<p data-i18n="android_experience">10+ years of professional experience in Android development.</p>
+										</li>
 								<li class="icon fa-laptop">
-									<h3>Everyday use:</h3>
-									<p>Kotlin (Jetpack Compose, Coroutines, Flows, Room, etc.)</p>
-									<p>Firebase Services (Remote Config, Analytics, App distribution, etc.)</p>
-									<p>Project organization (Jira, Confluence, Trello, Kanban, etc.)</p>
-								</li>
+										<h3 data-i18n="everyday_use_title">Everyday use:</h3>
+										<p data-i18n="everyday_use_1">Kotlin (Jetpack Compose, Coroutines, Flows, Room, etc.)</p>
+										<p data-i18n="everyday_use_2">Firebase Services (Remote Config, Analytics, App distribution, etc.)</p>
+										<p data-i18n="everyday_use_3">Project organization (Jira, Confluence, Trello, Kanban, etc.)</p>
+										</li>
 							</ul>
 						</div>
 					</section>
@@ -178,12 +190,12 @@
 				<!-- Footer -->
 					<footer id="footer">
 						<ul class="icons">
-							<li><a href="https://github.com/luanbarbosa" class="icon fa-github"><span class="label">Github</span></a></li>
-							<li><a href="https://www.linkedin.com/in/luan-barbosa-gomes/" class="icon fa-linkedin"><span class="label">Linkedin</span></a></li>
-							<li><a href="mailto:luanbarbosagomes@gmail.com" class="icon fa-envelope-o"><span class="label">Email</span></a></li>
+							<li><a href="https://github.com/luanbarbosa" class="icon fa-github"><span class="label" data-i18n="footer_github">Github</span></a></li>
+							<li><a href="https://www.linkedin.com/in/luan-barbosa-gomes/" class="icon fa-linkedin"><span class="label" data-i18n="footer_linkedin">Linkedin</span></a></li>
+							<li><a href="mailto:luanbarbosagomes@gmail.com" class="icon fa-envelope-o"><span class="label" data-i18n="footer_email">Email</span></a></li>
 						</ul>
 						<ul class="copyright">
-							<li>&copy;luanbarbosagomes. All rights reserved</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+							<li data-i18n="footer_copyright">&copy;luanbarbosagomes. All rights reserved</li><li data-i18n-html="footer_design_html">Design: <a href="http://html5up.net">HTML5 UP</a></li>
 						</ul>
 					</footer>
 
@@ -196,6 +208,7 @@
 			<script src="assets/js/skel.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="assets/js/i18n.js"></script>
 			<script src="assets/js/main.js"></script>
 
 	</body>

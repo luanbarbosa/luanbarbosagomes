@@ -1,0 +1,52 @@
+{
+  "title": "Luan Barbosa Gomes",
+  "name": "Luan Barbosa Gomes",
+  "subtitle": "Desenvolvedor Android Sênior",
+  "more_info": "Mais informações",
+  "technical_experience": "Experiência Técnica",
+  "android_title": "Android",
+  "android_experience": "Mais de 10 anos de experiência profissional em desenvolvimento Android.",
+  "everyday_use_title": "Uso diário:",
+  "everyday_use_1": "Kotlin (Jetpack Compose, Coroutines, Flows, Room, etc.)",
+  "everyday_use_2": "Serviços Firebase (Remote Config, Analytics, App distribution, etc.)",
+  "everyday_use_3": "Organização de projetos (Jira, Confluence, Trello, Kanban, etc.)",
+
+  "sanoma_title": "Aplicativos de notícias",
+  "sanoma_desc1": "Desenvolvedor Android Sênior interno na equipe responsável por criar uma plataforma para gerar 15+ aplicativos distintos de notícias para as marcas da Sanoma Media Finland",
+  "sanoma_desc2": "Usando as tecnologias mais recentes (incluindo Jetpack Compose) para construir melhores aplicativos para nossos clientes",
+
+  "nordea_wallet_title": "Wallet",
+  "nordea_wallet_desc1": "Desenvolvedor de TI Sênior interno na equipe Mobile and Emerging Payments do banco Nordea",
+  "nordea_wallet_desc2": "Responsável pelo desenvolvimento contínuo e manutenção do aplicativo Android",
+
+  "siirto_title": "Siirto",
+  "siirto_desc1": "Desenvolvedor de TI Sênior interno na equipe Mobile and Emerging Payments do banco Nordea",
+  "siirto_desc2": "Parte da equipe responsável pelo redesenho arquitetural e de UI para a versão 3.0",
+
+  "travel_app_title": "Aplicativo de viagem",
+  "travel_app_desc1": "Desenvolvedor Android Sênior na equipe de soluções digitais responsável pelo desenvolvimento contínuo e manutenção do aplicativo acompanhante de viagem",
+  "travel_app_highlight_html": "<i>Destaque:</i> Implementação do \"Advance Seat Reservation\"",
+
+  "sports_results_title": "Resultados esportivos",
+  "sports_results_desc1": "Desenvolvimento do aplicativo de resultados esportivos para o grupo de mídia Iltalehti como consultor",
+  "sports_results_desc2_html": "Desenvolvedor Android consultor em nome da Starcut (agora <u><a href=\"https://digia.com/en/\" target=\"_blank\">Digia</a></u>)",
+
+  "droneinfo_title": "Droneinfo",
+  "droneinfo_desc1": "Notificação e informação de voos de drones desenvolvida para a Agência Finlandesa de Segurança de Transportes - Traficom como consultor",
+  "droneinfo_desc2_html": "Desenvolvedor Android consultor em nome da Starcut (agora <u><a href=\"https://digia.com/en/\" target=\"_blank\">Digia</a></u>)",
+
+  "hifk_title": "HIFK",
+  "hifk_desc1": "Aplicativo do time de hóquei de Helsinki desenvolvido para HIFK",
+  "hifk_desc2_html": "Desenvolvedor Android consultor em nome da Starcut (agora <u><a href=\"https://digia.com/en/\" target=\"_blank\">Digia</a></u>)",
+
+  "walkmate_title": "Walkmate",
+  "walkmate_desc1": "Aplicativo companheiro de exercícios desenvolvido para a Sony Mobile Communications",
+  "walkmate_desc2": "Participação em um programa de estágio de 3 meses focado em melhorias de estabilidade",
+  "walkmate_desc3_html": "Desenvolvido em nome da <u><a href=\"https://www.venturus.org.br/en/\" target=\"_blank\">Venturus</a></u>",
+
+  "footer_github": "Github",
+  "footer_linkedin": "Linkedin",
+  "footer_email": "Email",
+  "footer_copyright": "©luanbarbosagomes. Todos os direitos reservados",
+  "footer_design_html": "Design: <a href=\"http://html5up.net\">HTML5 UP</a>"
+}
