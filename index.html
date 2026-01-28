@@ -68,6 +68,18 @@
 		.lang-select option {
 			font-size: 18px;
 		}
+
+		/* Make section titles bold and add spacing below */
+		.section-title p {
+			font-weight: 600;
+			margin-bottom: 0.5rem;
+		}
+
+		/* Allow hiding the surname on small screens to avoid wrapping */
+		.surname { display: inline; }
+		@media (max-width: 480px) {
+			.surname { display: none; }
+		}
 	</style>
 </head>
 
@@ -78,7 +90,7 @@
 
 		<!-- Header -->
 		<header id="header" class="alt">
-			<h1><a href="index.html"><span data-i18n="name">Luan Barbosa Gomes</span></a></h1>
+			<h1><a href="index.html"><span data-i18n-html="name">Luan Barbosa <span class="surname">Gomes</span></span></a></h1>
 			<div id="lang-selector">
 				<select id="lang-select" class="lang-select" aria-label="Language selector">
 					<option value="en">🇬🇧</option>
@@ -90,7 +102,7 @@
 		<!-- Banner -->
 		<section id="banner">
 			<div class="inner">
-				<h2 data-i18n="name">Luan Barbosa Gomes</h2>
+				<h2 data-i18n-html="name">Luan Barbosa <span class="surname">Gomes</span></h2>
 				<p style="font-size: large;" data-i18n="subtitle">Senior Android Developer</p>
 			</div>
 			<a href="#two" class="more scrolly" data-i18n="more_info">More info</a>

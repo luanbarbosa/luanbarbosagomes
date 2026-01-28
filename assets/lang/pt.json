@@ -1,6 +1,6 @@
 {
   "title": "Luan Barbosa Gomes",
-  "name": "Luan Barbosa Gomes",
+  "name": "Luan Barbosa <span class=\"surname\">Gomes</span>",
   "subtitle": "Desenvolvedor Android Sênior",
   "more_info": "Mais informações",
   "technical_experience": "Experiência Técnica",
@@ -11,7 +11,7 @@
   "everyday_use_2": "Serviços Firebase (Remote Config, Analytics, App distribution, etc.)",
   "everyday_use_3": "Organização de projetos (Jira, Confluence, Trello, Kanban, etc.)",
 
-  "sanoma_title": "Aplicativos de notícias",
+  "sanoma_title": "Apps de notícias",
   "sanoma_desc1": "Desenvolvedor Android Sênior na equipe responsável por criar uma plataforma que gera 15+ apps distintos de notícias para as marcas da Sanoma Media Finland",
   "sanoma_desc2": "Usando as tecnologias mais recentes (incluindo Jetpack Compose) para construir melhores aplicativos para nossos clientes",
 
@@ -23,7 +23,7 @@
   "siirto_desc1": "Desenvolvedor de TI Sênior na equipe Mobile and Emerging Payments do banco Nordea",
   "siirto_desc2": "Parte da equipe responsável pelo redesenho arquitetural e de UI para a versão 3.0",
 
-  "travel_app_title": "Aplicativo de viagem",
+  "travel_app_title": "App de viagem",
   "travel_app_desc1": "Desenvolvedor Android Sênior na equipe de soluções digitais responsável pelo desenvolvimento contínuo e manutenção do app de viagem",
   "travel_app_highlight_html": "<i>Destaque:</i> Implementação do \"Advance Seat Reservation\"",
 
