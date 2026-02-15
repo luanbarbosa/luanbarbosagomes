@@ -5,6 +5,7 @@
   "location": "Brasil",
   "more_info": "Mais informações",
   "professional_experience_header": "Experiência Profissional",
+  "residence_period": "Morei na Finlândia de 2016 a 2025 (maior parte da minha carreira profissional)",
   "technical_experience": "Experiência Técnica",
   "android_title": "Android",
   "android_experience": "Mais de 10 anos de experiência profissional em desenvolvimento Android.",
@@ -15,19 +16,19 @@
 
   "sanoma_title": "Apps de notícias",
   "sanoma_desc1": "Desenvolvedor Android Sênior na equipe responsável por criar uma plataforma que gera 15+ apps distintos de notícias para as marcas da Sanoma Media Finland",
-  "sanoma_desc2": "Usando as tecnologias mais recentes (incluindo Jetpack Compose) para construir melhores aplicativos para nossos clientes",
+  "sanoma_desc2": "Usando Jetpack Compose, Coroutines, Flows, DataStore, serviços do Firebase, Kamba, CLEAN, WebView híbrido e mais.",
 
   "nordea_wallet_title": "Wallet",
-  "nordea_wallet_desc1": "Desenvolvedor de TI Sênior na equipe Mobile and Emerging Payments do banco Nordea",
-  "nordea_wallet_desc2": "Responsável pelo desenvolvimento contínuo e manutenção do aplicativo Android",
+  "nordea_wallet_desc1": "Desenvolvedor Mobile Sênior focado no desenvolvimento contínuo e manutenção.",
+  "nordea_wallet_desc2": "Usando Kotlin, XML, Fragments, DataBinding etc.",
 
   "siirto_title": "Siirto",
-  "siirto_desc1": "Desenvolvedor de TI Sênior na equipe Mobile and Emerging Payments do banco Nordea",
-  "siirto_desc2": "Parte da equipe responsável pelo redesenho arquitetural e de UI para a versão 3.0",
+  "siirto_desc1": "Desenvolvedor Mobile Sênior focado no redesign arquitetural e de UI para a versão 3.0.",
+  "siirto_desc2": "Usando Kotlin, UI-toolkit functional proprietário (pré-Compose), Coroutines, Flows etc.",
 
   "travel_app_title": "App de viagem",
-  "travel_app_desc1": "Desenvolvedor Android Sênior na equipe de soluções digitais responsável pelo desenvolvimento contínuo e manutenção do app de viagem",
-  "travel_app_highlight_html": "<i>Destaque:</i> Implementação do \"Advance Seat Reservation\"",
+  "travel_app_desc1": "Desenvolvedor Android Sênior responsável pelo desenvolvimento contínuo e manutenção do app companheiro de viagem",
+  "travel_app_desc2": "Usando Kotlin (incluindo migração de Java para Kotlin), XML etc.",
 
   "sports_results_title": "Resultados esportivos",
   "sports_results_desc1": "Desenvolvimento do aplicativo de resultados esportivos para o grupo de mídia Iltalehti como consultor",

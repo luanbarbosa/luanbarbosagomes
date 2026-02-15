@@ -5,6 +5,7 @@
   "location": "Brazil",
   "more_info": "More info",
   "professional_experience_header": "Professional Experience",
+  "residence_period": "Lived in Finland from 2016 to 2025 (most of my professional career)",
   "technical_experience": "Technical Experience",
   "android_title": "Android",
   "android_experience": "10+ years of professional experience in Android development.",
@@ -14,20 +15,20 @@
   "everyday_use_3": "Project organization (Jira, Confluence, Trello, Kanban, etc.)",
 
   "sanoma_title": "News apps",
-  "sanoma_desc1": "In-house Senior Android developer in the team responsible for developing a new platform to generate 15+ distinct news apps for Sanoma Media Finland brands",
-  "sanoma_desc2": "Using the latest technologies (including Jetpack Compose) to build better apps for our customers",
+  "sanoma_desc1": "Senior Android developer responsible for developing a new platform to generate 15+ distinct news apps for Sanoma Media Finland brands",
+  "sanoma_desc2": "Using Jetpack Compose, Coroutines, Flows, DataStore, Firebase Services, Kamba, CLEAN, WebView hybrid, and more.",
 
   "nordea_wallet_title": "Wallet",
-  "nordea_wallet_desc1": "In-house Senior IT developer on the Mobile and Emerging Payments team at Nordea bank",
-  "nordea_wallet_desc2": "Responsible for the continuous development and maintenance of the Android application",
+  "nordea_wallet_desc1": "Senior Mobile Developer focused on continuous development and maintenance.",
+  "nordea_wallet_desc2": "Using Kotlin, XML, Fragments, DataBinding, etc.",
 
   "siirto_title": "Siirto",
-  "siirto_desc1": "In-house Senior IT developer on the Mobile and Emerging Payments team at Nordea bank",
-  "siirto_desc2": "Part of the team responsible for the architectural and UI redesign for the 3.0 version",
+  "siirto_desc1": "Senior Mobile Developer focused on architectural and UI redesign for the 3.0 version.",
+  "siirto_desc2": "Using Kotlin, in-house functional UI toolkit (pre-Compose), Coroutines, Flows, etc.",
 
   "travel_app_title": "Travel App",
-  "travel_app_desc1": "In-house Senior Android Developer on the digital solutions team responsible for the continuous development and maintenance of the travel companion app",
-  "travel_app_highlight_html": "<i>Highlight:</i> Implementation of the \"Advance Seat Reservation\"",
+  "travel_app_desc1": "Senior Android Developer responsible for the continuous development and maintenance of the travel companion app",
+  "travel_app_desc2": "Using Kotlin (incl. Java to Kotlin migration), XML, etc.",
 
   "sports_results_title": "Sports results",
   "sports_results_desc1": "Development of the sports results app for Iltalehti media group as a consultant",
