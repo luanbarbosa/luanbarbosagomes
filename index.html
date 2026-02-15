@@ -12,6 +12,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
 	<link rel="stylesheet" href="assets/css/main.css" />
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,300,0,0&icon_names=location_on" />
 	<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
 	<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
 	<style type="text/css">
@@ -80,6 +81,18 @@
 		@media (max-width: 480px) {
 			.surname { display: none; }
 		}
+
+		.location {
+			display: inline-flex;
+			align-items: center;
+			gap: 0.35rem;
+			font-size: large;
+		}
+
+		.location .material-symbols-outlined {
+			font-size: 1.25rem;
+			line-height: 1;
+		}
 	</style>
 </head>
 
@@ -104,7 +117,7 @@
 			<div class="inner">
 				<h2 data-i18n-html="name">Luan Barbosa <span class="surname">Gomes</span></h2>
 				<p style="font-size: large;" data-i18n="subtitle">Senior Android Developer</p>
-				<p class="location" data-i18n="location">Brazil</p>
+				<p class="location"><span class="material-symbols-outlined" aria-hidden="true">location_on</span><span data-i18n="location"></span></p>
 			</div>
 			<a href="#two" class="more scrolly" data-i18n="more_info">More info</a>
 		</section>
