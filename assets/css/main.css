@@ -692,10 +692,10 @@ button,
 }
 @media screen and (max-width:980px){.wrapper > .inner{width:100%;}
 }
-.experience-heading{background:transparent;display:flex;justify-content:center;align-items:center;min-height:8rem;margin:0;border-radius:0 0 1rem 1rem;padding:0 1rem;}
+.experience-heading{background:transparent;display:flex;justify-content:center;align-items:center;min-height:8rem;margin:0;border-radius:0 0 1rem 1rem;padding:0 1rem;padding-top:2.5rem;}
 .experience-heading .major{margin:0;text-align:center;width:100%;}
-.experience-heading .inner{display:flex;align-items:center;justify-content:center;width:100%;padding:0;}
-.experience-heading header.major{display:flex;align-items:center;justify-content:center;width:100%;}
+.experience-heading .inner{display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;padding:0;min-height:8rem;}
+.experience-heading header.major{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.35rem;width:100%;min-height:8rem;}
 .experience-heading header.major h2{border-bottom:none;margin:0;padding-bottom:0;}
 .wrapper.alt{padding:0;}
 .wrapper.style1{background-color:#21b2a6;color:#c7ebe8;}
