@@ -45,11 +45,55 @@
 	</style>
 
 	<style>
-		#lang-selector {
+		#header-actions {
 			position: absolute;
 			top: 0;
-			right: 24px;
+			right: 1.25em;
 			z-index: 50;
+			height: inherit;
+			display: flex;
+			align-items: center;
+			gap: 0.75rem;
+		}
+
+		#header-actions .social-icons {
+			margin: 0;
+			padding: 0;
+			display: flex;
+			align-items: center;
+			gap: 0;
+			list-style: none;
+		}
+
+		#header-actions .social-icons li {
+			padding: 0;
+		}
+
+		#header-actions .social-icons a {
+			color: rgba(255, 255, 255, 0.65);
+			font-size: 1.15rem;
+			display: inline-flex;
+			align-items: center;
+			transition: color 0.2s ease;
+			justify-content: center;
+			min-width: 40px;
+			min-height: 40px;
+			padding: 0;
+		}
+
+		#header-actions .social-icons a:hover {
+			color: #fff;
+		}
+
+		#header-actions .header-separator {
+			display: inline-block;
+			width: 1px;
+			height: 1.1rem;
+			background: rgba(255, 255, 255, 0.45);
+			margin: 0 0.4rem;
+		}
+
+		#lang-selector {
 			height: inherit;
 			display: flex;
 			align-items: center;
@@ -118,11 +162,19 @@
 		<!-- Header -->
 		<header id="header" class="alt">
 			<h1><a href="index.html"><span data-i18n-html="name">Luan Barbosa <span class="surname">Gomes</span></span></a></h1>
-			<div id="lang-selector">
-				<select id="lang-select" class="lang-select" aria-label="Language selector">
-					<option value="en">🇬🇧</option>
-					<option value="pt">🇧🇷</option>
-				</select>
+			<div id="header-actions">
+				<ul class="icons social-icons" aria-label="social links">
+					<li><a href="https://github.com/luanbarbosa" class="icon fa-github" target="_blank" rel="noopener"><span class="label" data-i18n="footer_github">Github</span></a></li>
+					<li><a href="https://www.linkedin.com/in/luan-barbosa-gomes/" class="icon fa-linkedin" target="_blank" rel="noopener"><span class="label" data-i18n="footer_linkedin">Linkedin</span></a></li>
+					<li><a href="mailto:luanbarbosagomes.work@gmail.com" class="icon fa-envelope-o"><span class="label" data-i18n="footer_email">Email</span></a></li>
+				</ul>
+				<span class="header-separator" aria-hidden="true"></span>
+				<div id="lang-selector">
+					<select id="lang-select" class="lang-select" aria-label="Language selector">
+						<option value="en">🇬🇧</option>
+						<option value="pt">🇧🇷</option>
+					</select>
+				</div>
 			</div>
 		</header>
 
@@ -338,9 +390,9 @@
 		<!-- Footer -->
 		<footer id="footer">
 			<ul class="icons">
-				<li><a href="https://github.com/luanbarbosa" class="icon fa-github"><span class="label"
+				<li><a href="https://github.com/luanbarbosa" target="_blank" class="icon fa-github"><span class="label"
 							data-i18n="footer_github">Github</span></a></li>
-				<li><a href="https://www.linkedin.com/in/luan-barbosa-gomes/" class="icon fa-linkedin"><span
+				<li><a href="https://www.linkedin.com/in/luan-barbosa-gomes/" target="_blank" class="icon fa-linkedin"><span
 							class="label" data-i18n="footer_linkedin">Linkedin</span></a></li>
 				<li><a href="mailto:luanbarbosagomes.work@gmail.com" class="icon fa-envelope-o"><span class="label"
 							data-i18n="footer_email">Email</span></a></li>
