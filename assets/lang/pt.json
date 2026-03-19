@@ -5,6 +5,7 @@
   "location": "Brasil",
   "more_info": "Mais informações",
   "professional_experience_header": "Experiência Profissional",
+  "personal_projects_header": "Projetos Pessoais",
   "residence_period": "Morei na Finlândia de 2016 a 2025 (maior parte da minha carreira profissional)",
   "technical_experience": "Experiência Técnica",
   "android_title": "Android",
@@ -13,6 +14,9 @@
   "everyday_use_1": "Kotlin (Jetpack Compose, Coroutines, Flows, Room, etc.)",
   "everyday_use_2": "Serviços Firebase (Remote Config, Analytics, App distribution, etc.)",
   "everyday_use_3": "Organização de projetos (Jira, Confluence, Trello, Kanban, etc.)",
+
+  "gym_nerd_desc1": "Progressive Web App desenvolvido como um projeto pessoal para acompanhar treinos na academia e o progresso.",
+  "gym_nerd_desc2": "Este web app foi vibe-coded para melhor compreensão do desenvolvimento usando IA (GitHub Copilot, Google Auth, API do Google Drive).",
 
   "sanoma_title": "Apps de notícias",
   "sanoma_desc1": "Desenvolvedor Android Sênior na equipe responsável por criar uma plataforma que gera 15+ apps distintos de notícias para as marcas da Sanoma Media Finland",

@@ -5,6 +5,7 @@
   "location": "Brazil",
   "more_info": "More info",
   "professional_experience_header": "Professional Experience",
+  "personal_projects_header": "Personal Projects",
   "residence_period": "Lived in Finland from 2016 to 2025 (most of my professional career)",
   "technical_experience": "Technical Experience",
   "android_title": "Android",
@@ -14,6 +15,9 @@
   "everyday_use_2": "Firebase Services (Remote Config, Analytics, App distribution, etc.)",
   "everyday_use_3": "Project organization (Jira, Confluence, Trello, Kanban, etc.)",
 
+  "gym_nerd_desc1": "Progressive Web App developed as a personal project to track gym workouts and progress",
+  "gym_nerd_desc2": "This web app was fully vibe-coded to better understand development using AI (GitHub Copilot, Google Auth, Google Drive API)",
+  
   "sanoma_title": "News apps",
   "sanoma_desc1": "Senior Android developer responsible for developing a new platform to generate 15+ distinct news apps for Sanoma Media Finland brands",
   "sanoma_desc2": "Using Jetpack Compose, Coroutines, Flows, DataStore, Firebase Services, Kamba, CLEAN, WebView hybrid, and more.",
