@@ -147,6 +147,11 @@
 			.surname { display: none; }
 		}
 
+		/* Hide site name on mobile to avoid overlap with header actions when scrolled */
+		@media screen and (max-width: 736px) {
+			#header h1 { display: none; }
+		}
+
 		.location {
 			display: inline-flex;
 			align-items: center;
