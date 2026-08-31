@@ -51,6 +51,14 @@ document.addEventListener('DOMContentLoaded', function () {
           el.textContent = text;
         }
       });
+
+      document.querySelectorAll('[data-i18n-href]').forEach(function (el) {
+        var key = el.getAttribute('data-i18n-href');
+        if (!key) return;
+        var href = translations[key];
+        if (typeof href === 'undefined') return;
+        el.setAttribute('href', href);
+      });
       if (translations.title) document.title = translations.title;
       // ensure selector reflects current language after translations applied
       if (select) {
