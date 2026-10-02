@@ -1031,6 +1031,21 @@
 				width: 44%;
 			}
 
+			/* history: widgets are tall + wide, so stack them in the right column without touching */
+			.history-art .widget:nth-of-type(1) {
+				left: 42%;
+				top: 3%;
+				width: 30%;
+				transform: translateZ(40px) rotateY(16deg) rotateX(4deg) rotateZ(-2deg);
+			}
+
+			.history-art .widget:nth-of-type(2) {
+				left: 52%;
+				top: 62%;
+				width: 38%;
+				transform: translateZ(80px) rotateY(16deg) rotateX(4deg) rotateZ(-2deg);
+			}
+
 			.block.flip .media {
 				order: 1;
 			}
@@ -1121,7 +1136,26 @@
 			</div>
 		</section>
 
-		<section class="block" id="stats">
+		<section class="block" id="history">
+			<div class="wrap">
+				<div class="media stats-art history-art rv">
+					<div class="device"><div class="screen"><img src="assets/images/history_1.png" alt="GymNerd history screen" /></div></div>
+					<img class="widget" src="assets/images/history_widget_1.png" alt="Workout history widget 1" />
+					<img class="widget" src="assets/images/history_widget_2.png" alt="Workout history widget 2" />
+				</div>
+				<div class="rv d1">
+					<h2 data-i18n="history.title">History</h2>
+					<p data-i18n="history.body">Look back at every workout you've done.</p>
+					<ul>
+						<li data-i18n="history.li1">Browse your past workouts</li>
+						<li data-i18n="history.li2">See your frequency per month</li>
+						<li data-i18n="history.li3">Add ad-hoc workouts</li>
+					</ul>
+				</div>
+			</div>
+		</section>
+
+		<section class="block flip" id="stats">
 			<div class="wrap">
 				<div class="media stats-art rv">
 					<div class="device"><div class="screen"><img src="assets/images/stats_1.png" alt="GymNerd statistics screen" /></div></div>
@@ -1141,7 +1175,7 @@
 			</div>
 		</section>
 
-		<section class="block flip" id="measurements">
+		<section class="block" id="measurements">
 			<div class="wrap">
 				<div class="media stats-art measure-art rv">
 					<div class="device"><div class="screen"><img src="assets/images/measurements.png" alt="GymNerd weight history screen" /></div></div>
@@ -1159,7 +1193,7 @@
 			</div>
 		</section>
 
-		<section class="block" id="assistant">
+		<section class="block flip" id="assistant">
 			<div class="wrap">
 				<div class="media stats-art assist-art rv">
 					<div class="device"><div class="screen"><img src="assets/images/assistant.png" alt="GymNerd onboarding goal screen" /></div></div>
