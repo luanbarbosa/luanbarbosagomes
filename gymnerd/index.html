@@ -804,8 +804,8 @@
 				   media takes the leftover space, with a floor so text + arrow always fit */
 				min-height: 180px;
 				overflow: hidden;
-				-webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 56px, #000 30%, transparent calc(100% - 48px));
-				mask-image: linear-gradient(to bottom, transparent 0, #000 56px, #000 30%, transparent calc(100% - 48px));
+				-webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - 96px), transparent calc(100% - 48px));
+				mask-image: linear-gradient(to bottom, #000 calc(100% - 96px), transparent calc(100% - 48px));
 			}
 
 			/* softer glow on mobile: faint, wide, no hard white core */
@@ -829,6 +829,74 @@
 				z-index: 2;
 				align-self: end;
 				margin-top: -64px;
+			}
+		}
+
+		/* mobile sections: like the hero, image on top fading into the text, but no viewport
+		   fitting and no crop, so more of the image shows */
+		@media (max-width: 859px) {
+			.block {
+				padding: 64px 0 80px;
+			}
+
+			.block .wrap {
+				gap: 0;
+			}
+
+			/* mobile: not enough room for every widget, keep phone + second widget */
+			.stats-art .widget:nth-of-type(1),
+			.stats-art .widget:nth-of-type(3) {
+				display: none;
+			}
+
+			/* phone and widget side by side */
+			.block .media.stats-art {
+				flex-direction: row;
+				align-items: center;
+				justify-content: center;
+				gap: 4%;
+			}
+
+			.stats-art .device {
+				width: 44%;
+				transform: rotateY(12deg) rotateZ(-2deg);
+			}
+
+			.measure-art .device {
+				transform: rotateY(-12deg) rotateZ(2deg);
+			}
+
+			.stats-art .widget:nth-of-type(2) {
+				width: 50%;
+				margin: 0;
+				align-self: center;
+			}
+
+			/* overlay instead of a mask: a mask would clip the tilted phones at the top */
+			.block .wrap > .media {
+				position: relative;
+			}
+
+			.block .wrap > .media::after {
+				content: "";
+				position: absolute;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				height: 140px;
+				z-index: 5;
+				pointer-events: none;
+				background: linear-gradient(to bottom, rgba(14, 14, 16, 0) 0%, rgba(14, 14, 16, .6) 40%, rgba(14, 14, 16, .92) 75%, var(--background) 100%);
+			}
+
+			.block .wrap > .media + div {
+				position: relative;
+				z-index: 6;
+				margin-top: -48px;
+				/* dark halo behind the whole text block, so it stays readable over the image */
+				background: rgba(14, 14, 16, .88);
+				box-shadow: 0 0 40px 40px rgba(14, 14, 16, .88);
+				text-shadow: 0 2px 12px rgba(0, 0, 0, .9);
 			}
 		}
 
