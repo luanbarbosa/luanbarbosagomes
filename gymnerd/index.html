@@ -572,6 +572,53 @@
 			cursor: pointer;
 		}
 
+		.viewer button.nav {
+			top: 50%;
+			translate: 0 -50%;
+			font-size: 26px;
+			padding-bottom: 3px;
+		}
+
+		.viewer button.prev {
+			left: max(28px, env(safe-area-inset-left));
+			right: auto;
+		}
+
+		.viewer button.next {
+			right: max(28px, env(safe-area-inset-right));
+		}
+
+		.viewer button:hover {
+			background: rgba(255, 255, 255, .16);
+		}
+
+		.viewer .dots {
+			position: absolute;
+			bottom: 10px;
+			left: 50%;
+			translate: -50% 0;
+			display: flex;
+			gap: 8px;
+		}
+
+		.viewer .dots i {
+			width: 7px;
+			height: 7px;
+			border-radius: 50%;
+			background: rgba(255, 255, 255, .3);
+			transition: background .2s, scale .2s;
+		}
+
+		.viewer .dots i.on {
+			background: #fff;
+			scale: 1.25;
+		}
+
+		.viewer.single .nav,
+		.viewer.single .dots {
+			display: none;
+		}
+
 		@keyframes viewer-in {
 			from { opacity: 0; }
 			to { opacity: 1; }
@@ -729,28 +776,28 @@
 				position: absolute;
 				left: 0;
 				top: 50%;
-				width: 36%;
+				width: 40%;
 				translate: 0 -50%;
 				transform: rotateY(16deg) rotateZ(-2deg);
 			}
 
-			/* widgets pop out of the phone at different depths and angles */
+			/* widgets step out of the phone: clear of it, each one closer to the viewer */
 			.stats-art .widget {
 				position: absolute;
-				width: 48%;
+				width: 36%;
 				margin: 0;
 			}
 
 			.stats-art .widget:nth-of-type(1) {
-				left: 33%;
-				top: -2%;
-				transform: translateZ(90px) rotateY(-20deg) rotateX(6deg) rotateZ(4deg);
+				left: 44%;
+				top: 8%;
+				transform: translateZ(60px) rotateY(16deg) rotateX(4deg) rotateZ(-2deg);
 			}
 
 			.stats-art .widget:nth-of-type(2) {
-				left: 46%;
-				top: 46%;
-				transform: translateZ(170px) rotateY(-20deg) rotateX(-5deg) rotateZ(-4deg);
+				left: 60%;
+				top: 40%;
+				transform: translateZ(150px) rotateY(16deg) rotateX(4deg) rotateZ(-2deg);
 			}
 
 			/* measurements: phone centered, widgets on opposite diagonal corners */
@@ -963,41 +1010,90 @@
 
 	<dialog class="viewer" id="viewer" aria-label="Image viewer">
 		<div class="viewer-stage"></div>
-		<button type="button" aria-label="Close">&times;</button>
+		<button type="button" class="close" aria-label="Close">&times;</button>
+		<button type="button" class="nav prev" aria-label="Previous image">&lsaquo;</button>
+		<button type="button" class="nav next" aria-label="Next image">&rsaquo;</button>
+		<div class="dots" aria-hidden="true"></div>
 	</dialog>
 
 	<script src="i18n.js"></script>
 	<script>
 		(function () {
-			/* fullscreen image viewer */
+			/* fullscreen image viewer: flip through the images of the clicked section */
 			var viewer = document.getElementById("viewer");
 			if (viewer && viewer.showModal) {
 				var stage = viewer.querySelector(".viewer-stage");
+				var dots = viewer.querySelector(".dots");
+				var group = [], index = 0;
+
+				var build = function (img) {
+					var device = img.closest(".device");
+					var content;
+					if (device) {
+						/* keep the device frame and cropped screen */
+						content = device.cloneNode(true);
+						var inner = content.querySelector("img");
+						inner.removeAttribute("tabindex");
+						inner.removeAttribute("role");
+					} else {
+						content = document.createElement("img");
+						content.src = img.currentSrc || img.src;
+						content.alt = img.alt;
+						content.style.borderRadius = getComputedStyle(img).borderRadius;
+					}
+					return content;
+				};
+
+				var show = function (i, dir) {
+					index = (i + group.length) % group.length;
+					var content = build(group[index]);
+					stage.replaceChildren(content);
+					if (dir && content.animate) {
+						content.animate(
+							[{ opacity: 0, translate: (dir * 40) + "px 0" }, { opacity: 1, translate: "0 0" }],
+							{ duration: 260, easing: "cubic-bezier(.2, .8, .2, 1)" }
+						);
+					}
+					Array.prototype.forEach.call(dots.children, function (d, n) {
+						d.classList.toggle("on", n === index);
+					});
+				};
+
+				var open = function (img) {
+					group = Array.prototype.slice.call(img.closest(".media").querySelectorAll("img"));
+					dots.replaceChildren.apply(dots, group.map(function () { return document.createElement("i"); }));
+					viewer.classList.toggle("single", group.length < 2);
+					show(group.indexOf(img), 0);
+					viewer.showModal();
+				};
+
 				document.querySelectorAll(".block .media img").forEach(function (img) {
 					img.tabIndex = 0;
 					img.setAttribute("role", "button");
-					var open = function () {
-						var device = img.closest(".device");
-						var content;
-						if (device) {
-							/* keep the device frame and cropped screen */
-							content = device.cloneNode(true);
-							var inner = content.querySelector("img");
-							inner.removeAttribute("tabindex");
-							inner.removeAttribute("role");
-						} else {
-							content = document.createElement("img");
-							content.src = img.currentSrc || img.src;
-							content.alt = img.alt;
-						}
-						stage.replaceChildren(content);
-						viewer.showModal();
-					};
-					img.addEventListener("click", open);
+					img.addEventListener("click", function () { open(img); });
 					img.addEventListener("keydown", function (e) {
-						if (e.key === "Enter" || e.key === " ") { e.preventDefault(); open(); }
+						if (e.key === "Enter" || e.key === " ") { e.preventDefault(); open(img); }
 					});
 				});
+
+				viewer.querySelector(".prev").addEventListener("click", function (e) { e.stopPropagation(); show(index - 1, -1); });
+				viewer.querySelector(".next").addEventListener("click", function (e) { e.stopPropagation(); show(index + 1, 1); });
+				viewer.addEventListener("keydown", function (e) {
+					if (group.length < 2) return;
+					if (e.key === "ArrowLeft") show(index - 1, -1);
+					if (e.key === "ArrowRight") show(index + 1, 1);
+				});
+
+				/* swipe */
+				var startX = null;
+				viewer.addEventListener("touchstart", function (e) { startX = e.touches[0].clientX; }, { passive: true });
+				viewer.addEventListener("touchend", function (e) {
+					if (startX === null || group.length < 2) return;
+					var dx = e.changedTouches[0].clientX - startX;
+					startX = null;
+					if (Math.abs(dx) > 50) { show(index + (dx < 0 ? 1 : -1), dx < 0 ? 1 : -1); }
+				}, { passive: true });
+
 				viewer.addEventListener("click", function () { viewer.close(); });
 			}
 
