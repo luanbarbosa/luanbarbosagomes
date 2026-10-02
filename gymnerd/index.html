@@ -349,7 +349,7 @@
 			perspective: 1400px;
 			perspective-origin: 50% 50%;
 			position: relative;
-			width: 86%;
+			width: 76%;
 			background: none;
 			box-shadow: none;
 			padding: 0;
@@ -680,21 +680,20 @@
 		}
 
 		.closing .app-icon {
-			width: 76px;
-			height: 76px;
-			border-radius: 18px;
-			margin-bottom: 28px;
+			width: 152px;
+			height: 152px;
+			border-radius: 36px;
+			margin-bottom: 36px;
 		}
 
 		.closing h2 {
-			font-size: clamp(38px, 9vw, 72px);
-			margin-bottom: 18px;
+			font-size: clamp(34px, 8vw, 64px);
+			max-width: 14em;
+			margin: 0 auto 36px;
 		}
 
-		.closing p {
-			color: var(--text-2);
-			max-width: 420px;
-			margin: 0 auto 32px;
+		.closing h2 em {
+			font-style: normal;
 		}
 
 		.closing .badges {
@@ -871,7 +870,7 @@
 			}
 
 			.stats-art .device {
-				width: 44%;
+				width: 40%;
 				transform: rotateY(12deg) rotateZ(-2deg);
 			}
 
@@ -976,7 +975,7 @@
 				position: absolute;
 				left: 0;
 				top: 50%;
-				width: 40%;
+				width: 36%;
 				translate: 0 -50%;
 				transform: rotateY(16deg) rotateZ(-2deg);
 			}
@@ -1094,12 +1093,12 @@
 					<div class="device"><div class="screen"><img src="assets/images/routines_2.png" alt="GymNerd routines screen 2" /></div></div>
 				</div>
 				<div class="rv d1">
-					<h2 data-i18n="routines.title">Routines title</h2>
-					<p data-i18n="routines.body">Placeholder text for the routines section. Replace with the real description.</p>
+					<h2 data-i18n="routines.title">Routines</h2>
+					<p data-i18n="routines.body">Organize your exercises as you see fit.</p>
 					<ul>
-						<li data-i18n="routines.li1">Placeholder point one</li>
-						<li data-i18n="routines.li2">Placeholder point two</li>
-						<li data-i18n="routines.li3">Placeholder point three</li>
+						<li data-i18n="routines.li1">Unlimited routines</li>
+						<li data-i18n="routines.li2">Unlimited exercises</li>
+						<li data-i18n="routines.li3">Create custom exercises</li>
 					</ul>
 				</div>
 			</div>
@@ -1112,12 +1111,11 @@
 					<div class="device"><div class="screen"><img src="assets/images/player_2.png" alt="GymNerd player screen 2" /></div></div>
 				</div>
 				<div class="rv d1">
-					<h2 data-i18n="play.title">Play title</h2>
-					<p data-i18n="play.body">Placeholder text for the play section. Replace with the real description.</p>
+					<h2 data-i18n="play.title">Workout player</h2>
+					<p data-i18n="play.body">Use the app while you work out.</p>
 					<ul>
-						<li data-i18n="play.li1">Placeholder point one</li>
-						<li data-i18n="play.li2">Placeholder point two</li>
-						<li data-i18n="play.li3">Placeholder point three</li>
+						<li data-i18n="play.li1">Adjust your workout on the fly</li>
+						<li data-i18n="play.li2">Get a workout report at the end</li>
 					</ul>
 				</div>
 			</div>
@@ -1131,12 +1129,13 @@
 					<img class="widget" src="assets/images/stats_widget_2.png" alt="Exercise weight progression chart" />
 				</div>
 				<div class="rv d1">
-					<h2 data-i18n="stats.title">Stats title</h2>
-					<p data-i18n="stats.body">Placeholder text for the stats section. Replace with the real description.</p>
+					<h2 data-i18n="stats.title">Statistics</h2>
+					<p data-i18n="stats.body">Get a full overview of your progress.</p>
 					<ul>
-						<li data-i18n="stats.li1">Placeholder point one</li>
-						<li data-i18n="stats.li2">Placeholder point two</li>
-						<li data-i18n="stats.li3">Placeholder point three</li>
+						<li data-i18n="stats.li1">Workout frequency</li>
+						<li data-i18n="stats.li2">Frequency by exercise type</li>
+						<li data-i18n="stats.li3">Progress by exercise type</li>
+						<li data-i18n="stats.li4">Progress for each exercise</li>
 					</ul>
 				</div>
 			</div>
@@ -1150,12 +1149,11 @@
 					<img class="widget" src="assets/images/measurements._widget_2.png" alt="Log weight with a scrolling ruler" />
 				</div>
 				<div class="rv d1">
-					<h2 data-i18n="measurements.title">Measurements title</h2>
-					<p data-i18n="measurements.body">Placeholder text for the measurements section. Replace with the real description.</p>
+					<h2 data-i18n="measurements.title">Measurements</h2>
+					<p data-i18n="measurements.body">Track your body weight.</p>
 					<ul>
-						<li data-i18n="measurements.li1">Placeholder point one</li>
-						<li data-i18n="measurements.li2">Placeholder point two</li>
-						<li data-i18n="measurements.li3">Placeholder point three</li>
+						<li data-i18n="measurements.li1">Log your weight</li>
+						<li data-i18n="measurements.li2">Follow your weight progress</li>
 					</ul>
 				</div>
 			</div>
@@ -1169,12 +1167,12 @@
 					<img class="widget" src="assets/images/assistant_widget_2.png" alt="Mascot telling you that you can do better" />
 				</div>
 				<div class="rv d1">
-					<h2 data-i18n="assistant.title">Assistant title</h2>
-					<p data-i18n="assistant.body">Placeholder text for the assistant section. Replace with the real description.</p>
+					<h2 data-i18n="assistant.title">Assistant</h2>
+					<p data-i18n="assistant.body">A semi-intelligent assistant (not AI) to help you reach your goals.</p>
 					<ul>
-						<li data-i18n="assistant.li1">Placeholder point one</li>
-						<li data-i18n="assistant.li2">Placeholder point two</li>
-						<li data-i18n="assistant.li3">Placeholder point three</li>
+						<li data-i18n="assistant.li1">Get routine recommendations</li>
+						<li data-i18n="assistant.li2">Get status messages in different moods: encouraging, neutral or sassy</li>
+						<li data-i18n="assistant.li3">Get notified about "stale" exercises</li>
 					</ul>
 				</div>
 			</div>
@@ -1183,8 +1181,7 @@
 		<section class="closing" id="get">
 			<div class="wrap rv">
 				<img class="app-icon" src="assets/Play-App-Icon.svg" alt="GymNerd app icon" />
-				<h2 data-i18n="closing.title">Free unless it costs us</h2>
-				<p data-i18n="closing.body">Core tracking stays free. We only charge for what costs us money to run.</p>
+				<h2 data-i18n="hero.mantra">If it doesn't cost us, it will be free for you!</h2>
 				<div class="badges">
 					<a href="#" class="badge" aria-label="Get it on Google Play"><img src="assets/Google_Play_Store_badge_EN.svg" alt="Get it on Google Play" /></a>
 					<a href="#" class="badge" aria-label="Download on the App Store"><img src="assets/Download_on_the_App_Store_Badge.svg" alt="Download on the App Store" /></a>
@@ -1196,7 +1193,7 @@
 	<footer>
 		<div class="wrap">
 			<span>&copy; 2026 Luan Barbosa Gomes</span>
-			<span><a href="../privacy-policy.html" data-i18n="footer.privacy">Privacy policy</a> &nbsp;·&nbsp; <a href="../index.html">luanbarbosagomes.com</a></span>
+			<span><a href="/gymnerd/privacy-policy.html" data-i18n="footer.privacy">Privacy policy</a> &nbsp;·&nbsp; <a href="../index.html">luanbarbosagomes.com</a></span>
 		</div>
 	</footer>
 

@@ -61,21 +61,29 @@
     font-size: 14px;
   }
 
-  #lang-select {
-    background: var(--surface);
-    color: var(--text-primary);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 8px 12px;
-    font-family: 'Inter', sans-serif;
-    font-size: 14px;
-    font-weight: 500;
-    cursor: pointer;
+  .lang {
+    display: inline-flex;
     flex-shrink: 0;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    overflow: hidden;
   }
 
-  #lang-select:focus {
-    outline: 2px solid var(--primary);
+  .lang button {
+    background: transparent;
+    border: 0;
+    color: var(--text-secondary);
+    font: inherit;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    padding: 5px 11px;
+    cursor: pointer;
+  }
+
+  .lang button[aria-pressed="true"] {
+    background: var(--primary);
+    color: var(--on-primary);
   }
 
   h2 {
@@ -127,10 +135,10 @@
         <h1 data-i18n="title">Privacy Policy</h1>
         <div class="updated" data-i18n="updated">Last updated: September 18, 2026</div>
       </div>
-      <select id="lang-select" aria-label="Language">
-        <option value="en">English</option>
-        <option value="pt-BR">Português (Brasil)</option>
-      </select>
+      <div class="lang" role="group" aria-label="Language">
+        <button type="button" data-lang="en" aria-pressed="true">EN</button>
+        <button type="button" data-lang="pt" aria-pressed="false">PT</button>
+      </div>
     </header>
 
     <p data-i18n="intro">Not Bad Apps ("we", "us", "our") operates the GymNerd mobile application (the "App"). This Privacy Policy explains what information we collect, how we use it, and your rights regarding that information.</p>
@@ -244,27 +252,36 @@
     }
   };
 
+  // same storage key and codes (en | pt) as the main page, so the choice carries over
+  var STORAGE_KEY = "gymnerd-lang";
+  var supported = ["en", "pt"];
+
   function applyLanguage(lang) {
-    var dict = translations[lang] || translations.en;
+    var dict = translations[lang === "pt" ? "pt-BR" : "en"];
     document.querySelectorAll("[data-i18n]").forEach(function (el) {
       var key = el.getAttribute("data-i18n");
       if (dict[key]) el.textContent = dict[key];
     });
-    document.documentElement.lang = lang;
-    try { localStorage.setItem("privacy-policy-lang", lang); } catch (e) {}
+    document.documentElement.lang = lang === "pt" ? "pt-BR" : "en";
+    document.querySelectorAll(".lang button").forEach(function (b) {
+      b.setAttribute("aria-pressed", b.getAttribute("data-lang") === lang ? "true" : "false");
+    });
+    try { localStorage.setItem(STORAGE_KEY, lang); } catch (e) {}
   }
 
-  var select = document.getElementById("lang-select");
-  select.addEventListener("change", function () {
-    applyLanguage(this.value);
-  });
+  function initialLanguage() {
+    try {
+      var saved = localStorage.getItem(STORAGE_KEY);
+      if (supported.indexOf(saved) !== -1) return saved;
+    } catch (e) {}
+    var nav = (navigator.language || "en").slice(0, 2).toLowerCase();
+    return supported.indexOf(nav) !== -1 ? nav : "en";
+  }
 
-  var savedLang = "en";
-  try {
-    savedLang = localStorage.getItem("privacy-policy-lang") || (navigator.language && navigator.language.startsWith("pt") ? "pt-BR" : "en");
-  } catch (e) {}
-  select.value = savedLang;
-  applyLanguage(savedLang);
+  document.querySelectorAll(".lang button").forEach(function (b) {
+    b.addEventListener("click", function () { applyLanguage(b.getAttribute("data-lang")); });
+  });
+  applyLanguage(initialLanguage());
 </script>
 </body>
 </html>
