@@ -438,8 +438,8 @@
 			width: 90%;
 			aspect-ratio: 1;
 			translate: -50% -50%;
-			background: radial-gradient(circle, rgba(228, 229, 232, .3) 0%, rgba(228, 229, 232, .12) 45%, transparent 70%);
-			filter: blur(40px);
+			background: radial-gradient(circle, rgba(228, 229, 232, .16) 0%, rgba(228, 229, 232, .06) 40%, transparent 65%);
+			filter: blur(44px);
 			pointer-events: none;
 		}
 
@@ -470,8 +470,8 @@
 
 		.stats-art .widget:nth-of-type(3) { align-self: flex-start; transform: rotateY(-9deg) rotateZ(-1deg); z-index: 4; }
 
-		.measure-art .widget:nth-of-type(1) { border-radius: 5.5% / 5%; }
-		.measure-art .widget:nth-of-type(2) { border-radius: 5.5% / 6.1%; }
+		.measure-art .widget:nth-of-type(1) { border-radius: 5.5% / 6.1%; }
+		.measure-art .widget:nth-of-type(2) { border-radius: 5.5% / 5%; }
 
 		.stats-art .widget:nth-of-type(1) { align-self: flex-start; transform: rotateY(-9deg) rotateZ(-1.5deg); z-index: 2; margin-top: 16px; }
 		.stats-art .widget:nth-of-type(2) { align-self: flex-end; transform: rotateY(9deg) rotateZ(1.5deg); z-index: 3; }
@@ -530,6 +530,15 @@
 			animation: viewer-in .25s var(--ease);
 		}
 
+		.viewer {
+			--nav-x: 100px; /* side room kept clear for the prev/next buttons */
+			--nav-y: 0px;
+		}
+
+		.viewer.single {
+			--nav-x: 0px;
+		}
+
 		.viewer-stage {
 			display: flex;
 			align-items: center;
@@ -541,7 +550,7 @@
 			--bezel: 10px;
 			--corner: 46px;
 			--gap: 28px; /* same inset as the close button */
-			--screen-h: min(calc(100vh - 2 * var(--gap) - 2 * var(--bezel) - 3px), calc((100vw - 2 * var(--gap) - 2 * var(--bezel) - 3px) * 2636 / 1280));
+			--screen-h: min(calc(100vh - 2 * var(--gap) - var(--nav-y) - 2 * var(--bezel) - 3px), calc((100vw - 2 * var(--nav-x) - 2 * var(--bezel) - 3px) * 2636 / 1280));
 			flex: none;
 			filter: drop-shadow(0 0 1px #E4E5E8) drop-shadow(0 24px 48px rgba(0, 0, 0, .6));
 		}
@@ -551,8 +560,8 @@
 		}
 
 		.viewer-stage > img {
-			max-width: 94vw;
-			max-height: 94vh;
+			max-width: calc(100vw - 2 * max(var(--nav-x), 3vw));
+			max-height: calc(94vh - var(--nav-y));
 			object-fit: contain;
 			filter: drop-shadow(0 0 1px #E4E5E8) drop-shadow(0 24px 48px rgba(0, 0, 0, .6));
 		}
@@ -617,6 +626,30 @@
 		.viewer.single .nav,
 		.viewer.single .dots {
 			display: none;
+		}
+
+		/* narrow screens: buttons drop to the bottom corners, image keeps the full width */
+		@media (max-width: 700px) {
+			.viewer {
+				--nav-x: 12px;
+				--nav-y: 72px;
+				box-sizing: border-box;
+				padding-bottom: var(--nav-y);
+			}
+
+			.viewer.single {
+				--nav-y: 0px;
+				padding-bottom: 0;
+			}
+
+			.viewer button.nav {
+				top: auto;
+				bottom: 14px;
+				translate: none;
+			}
+
+			.viewer button.prev { left: 16px; }
+			.viewer button.next { right: 16px; }
 		}
 
 		@keyframes viewer-in {
@@ -713,14 +746,100 @@
 			}
 		}
 
+		/* scroll-down arrow */
+		.hero .scroll-down {
+			position: absolute;
+			left: 50%;
+			bottom: 16px;
+			z-index: 3;
+			translate: -50% 0;
+			width: 44px;
+			height: 44px;
+			display: grid;
+			place-items: center;
+			color: var(--text-2);
+			border-radius: 50%;
+			animation: hero-bob 2s ease-in-out infinite;
+		}
+
+		.hero .scroll-down:hover {
+			color: var(--primary);
+		}
+
+		.hero .scroll-down svg {
+			width: 26px;
+			height: 26px;
+		}
+
+		@keyframes hero-bob {
+			0%, 100% { transform: translateY(0); }
+			50% { transform: translateY(6px); }
+		}
+
+		@media (prefers-reduced-motion: reduce) {
+			.hero .scroll-down { animation: none; }
+		}
+
+		/* mobile hero: fills the viewport; image on top (cropped), text overlaps its bottom edge */
+		@media (max-width: 859px) {
+			.hero {
+				display: flex;
+				flex-direction: column;
+				min-height: calc(100vh - 64px);
+				min-height: calc(100svh - 64px);
+				padding: 24px 0 72px;
+			}
+
+			.hero .wrap {
+				flex: 1;
+				grid-template-rows: minmax(0, 1fr) auto;
+				gap: 0;
+			}
+
+			.hero .media {
+				order: -1;
+				align-self: stretch;
+				max-height: none;
+				/* image is absolutely positioned so it never sets the height;
+				   media takes the leftover space, with a floor so text + arrow always fit */
+				min-height: 180px;
+				overflow: hidden;
+				-webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 56px, #000 30%, transparent calc(100% - 48px));
+				mask-image: linear-gradient(to bottom, transparent 0, #000 56px, #000 30%, transparent calc(100% - 48px));
+			}
+
+			/* softer glow on mobile: faint, wide, no hard white core */
+			.hero .media::before {
+				top: 30%;
+				background: radial-gradient(circle, rgba(228, 229, 232, .16) 0%, rgba(228, 229, 232, .06) 45%, transparent 70%);
+				filter: blur(40px);
+			}
+
+			.hero .device {
+				position: absolute;
+				top: 32px;
+				left: 50%;
+				translate: -50% 0;
+				width: max-content;
+				max-width: none;
+			}
+
+			.hero .wrap > div:first-child {
+				position: relative;
+				z-index: 2;
+				align-self: end;
+				margin-top: -64px;
+			}
+		}
+
 		@media (min-width: 860px) {
 			.hero {
 				/* Keep the hero within the viewport instead of letting the
 				   tall portrait image determine the section height. */
 				height: calc(100vh - 64px);
+				height: calc(100svh - 64px);
 				min-height: 560px;
-				max-height: 900px;
-				padding: 48px 0;
+				padding: 48px 0 80px;
 			}
 
 			.hero .wrap {
@@ -800,50 +919,36 @@
 				transform: translateZ(150px) rotateY(16deg) rotateX(4deg) rotateZ(-2deg);
 			}
 
-			/* measurements: phone centered, widgets on opposite diagonal corners */
+			/* measurements: mirror of stats, phone on the right and widgets stepping out to the left */
 			.measure-art .device {
-				left: 31%;
-				right: auto;
-				width: 36%;
-				transform: rotateZ(-2deg);
+				left: auto;
+				right: 0;
+				transform: rotateY(-16deg) rotateZ(2deg);
 			}
 
 			.measure-art .widget:nth-of-type(1) {
-				left: 0;
-				top: 3%;
-				width: 40%;
-				z-index: 4;
-				transform: translateZ(120px) rotateY(18deg) rotateX(5deg) rotateZ(-4deg);
+				left: 20%;
+				top: 0;
+				transform: translateZ(60px) rotateY(-16deg) rotateX(4deg) rotateZ(2deg);
 			}
 
 			.measure-art .widget:nth-of-type(2) {
-				left: 60%;
-				top: 50%;
-				width: 40%;
-				transform: translateZ(120px) rotateY(-18deg) rotateX(-4deg) rotateZ(3deg);
+				left: 4%;
+				top: 35%;
+				transform: translateZ(150px) rotateY(-16deg) rotateX(4deg) rotateZ(2deg);
 			}
 
-			/* assistant: phone centered, two widgets on opposite sides */
-			.assist-art .device {
-				left: 31%;
-				width: 36%;
-				transform: rotateZ(2deg);
-			}
-
+			/* assistant: same as stats; the widgets are wide and short, so they get more width */
 			.assist-art .widget:nth-of-type(1) {
-				left: 0;
-				top: 2%;
-				width: 44%;
-				z-index: 4;
-				transform: translateZ(130px) rotateY(18deg) rotateX(5deg) rotateZ(-4deg);
+				left: 44%;
+				top: 21%;
+				width: 50%;
 			}
 
 			.assist-art .widget:nth-of-type(2) {
-				left: 58%;
-				top: 28%;
-				width: 42%;
-				z-index: 3;
-				transform: translateZ(100px) rotateY(-18deg) rotateX(-3deg) rotateZ(3deg);
+				left: 54%;
+				top: 49%;
+				width: 44%;
 			}
 
 			.block.flip .media {
@@ -893,6 +998,9 @@
 							alt="GymNerd app"/></div></div>
 				</div>
 			</div>
+			<a href="#routines" class="scroll-down" aria-label="Scroll down">
+				<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+			</a>
 		</section>
 
 		<section class="block" id="routines">
@@ -954,8 +1062,8 @@
 			<div class="wrap">
 				<div class="media stats-art measure-art rv">
 					<div class="device"><div class="screen"><img src="assets/images/measurements.png" alt="GymNerd weight history screen" /></div></div>
-					<img class="widget" src="assets/images/measurements._widget_1.png" alt="Log weight with a scrolling ruler" />
-					<img class="widget" src="assets/images/measurements._widget_2.png" alt="Weight progress chart" />
+					<img class="widget" src="assets/images/measurements._widget_1.png" alt="Weight progress chart" />
+					<img class="widget" src="assets/images/measurements._widget_2.png" alt="Log weight with a scrolling ruler" />
 				</div>
 				<div class="rv d1">
 					<h2 data-i18n="measurements.title">Measurements title</h2>
