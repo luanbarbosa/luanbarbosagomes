@@ -234,52 +234,62 @@
 		.hero .media {
 			justify-self: center;
 			position: relative;
+			width: 100%;
+			max-height: 70vh;
+			display: flex;
+			justify-content: center;
 		}
 
-		/* device */
-		.device {
-			position: relative;
-			width: 280px;
-			aspect-ratio: 9 / 19;
-			background: var(--surface);
-			border: 7px solid #26262C;
-			border-radius: 40px;
-			overflow: hidden;
-			box-shadow: 0 40px 80px -30px rgba(0, 0, 0, .8), 0 0 0 1px #000;
-		}
-
-		.device::before {
+		/* Glow behind the dark hero image so it separates from the dark page. */
+		.hero .media::before,
+		.hero .media::after {
 			content: "";
 			position: absolute;
-			top: 9px;
+			top: 50%;
 			left: 50%;
-			width: 64px;
-			height: 18px;
-			transform: translateX(-50%);
-			background: #000;
-			border-radius: 999px;
-			z-index: 3;
+			border-radius: 50%;
+			pointer-events: none;
 		}
 
-		.device .shot {
-			width: 100%;
-			height: 100%;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			text-align: center;
-			padding: 12px;
-			background: var(--row);
-			color: var(--text-3);
-			font-size: 12px;
-			line-height: 1.4;
+		.hero .media::before {
+			width: 90%;
+			aspect-ratio: 1;
+			translate: -50% -50%;
+			background: conic-gradient(from 0deg, var(--primary), var(--outline), #8A6A1A, var(--surface-2), var(--primary));
+			filter: blur(70px);
+			opacity: .6;
+			animation: hero-spin 18s linear infinite;
 		}
 
-		.device img {
+		.hero .media::after {
+			width: 70%;
+			aspect-ratio: 1;
+			translate: -50% -50%;
+			border: 2px dashed rgba(242, 194, 75, .35);
+			animation: hero-spin 40s linear infinite reverse;
+		}
+
+		@keyframes hero-spin {
+			to { rotate: 360deg; }
+		}
+
+		@media (prefers-reduced-motion: reduce) {
+			.hero .media::before,
+			.hero .media::after {
+				animation: none;
+			}
+		}
+
+		.hero .media img {
+			position: relative;
+			z-index: 1;
 			display: block;
-			width: 100%;
-			height: 100%;
-			object-fit: cover;
+			width: auto;
+			max-width: 100%;
+			max-height: 70vh;
+			height: auto;
+			object-fit: contain;
+			filter: drop-shadow(0 0 1px rgba(242, 194, 75, .6)) drop-shadow(0 20px 40px rgba(0, 0, 0, .5));
 		}
 
 		/* sections */
@@ -428,22 +438,40 @@
 
 		@media (min-width: 860px) {
 			.hero {
-				padding: 88px 0 104px;
+				/* Keep the hero within the viewport instead of letting the
+				   tall portrait image determine the section height. */
+				height: calc(100vh - 64px);
+				min-height: 560px;
+				max-height: 900px;
+				padding: 48px 0;
 			}
 
 			.hero .wrap {
+				height: 100%;
 				grid-template-columns: 1.15fr 1fr;
 				gap: 64px;
+				align-items: center;
 			}
 
 			.hero .media {
+				height: 100%;
+				min-height: 0;
+				display: flex;
+				align-items: center;
+				justify-content: center;
 				justify-self: end;
 				margin-right: 24px;
 			}
 
-			.device {
-				width: 300px;
+			.hero .media img {
+				display: block;
+				width: auto;
+				height: 100%;
+				max-width: 100%;
+				max-height: 100%;
+				object-fit: contain;
 			}
+
 
 			.block {
 				padding: 128px 0;
@@ -456,6 +484,13 @@
 
 			.block.flip .media {
 				order: 1;
+			}
+
+			.media img {
+				display: block;
+				width: 100%;
+				height: auto;
+				max-width: 100%;
 			}
 		}
 	</style>
@@ -488,86 +523,96 @@
 				</div>
 
 				<div class="media">
-					<div class="device" id="live">
-						<div class="shot" data-shot="shot.screenshot|1080 × 2280">Screenshot<br />1080 × 2280</div>
-					</div>
+					<img
+						id="live"
+						src="assets/images/illustration_home_en.webp"
+						data-image-en="assets/images/illustration_home_en.webp"
+						data-image-pt="assets/images/illustration_home_pt.webp"
+						alt="GymNerd app"/>
 				</div>
 			</div>
 		</section>
 
-		<section class="block" id="log">
+		<section class="block" id="routines">
 			<div class="wrap">
 				<div class="media rv">
-					<div class="device">
-						<div class="shot" data-shot="shot.screenshot|@shot.log">Screenshot</div>
-					</div>
+					<img src="assets/images/illustration_routines_en.webp" data-image-en="assets/images/illustration_routines_en.webp" data-image-pt="assets/images/illustration_routines_pt.webp" alt="GymNerd routines illustration" />
 				</div>
 				<div class="rv d1">
-					<h2 data-i18n="log.title">Log workouts</h2>
-					<p data-i18n="log.body">Pick the exercise, enter weight and reps, move on. The last session is right there so you know what to beat.</p>
+					<h2 data-i18n="routines.title">Routines title</h2>
+					<p data-i18n="routines.body">Placeholder text for the routines section. Replace with the real description.</p>
 					<ul>
-						<li data-i18n="log.li1">Previous numbers next to every set</li>
-						<li data-i18n="log.li2">Rest days as part of the plan</li>
-						<li data-i18n="log.li3">Edit anything afterward</li>
-						<li data-i18n="log.li4">Few taps per set</li>
+						<li data-i18n="routines.li1">Placeholder point one</li>
+						<li data-i18n="routines.li2">Placeholder point two</li>
+						<li data-i18n="routines.li3">Placeholder point three</li>
 					</ul>
 				</div>
 			</div>
 		</section>
 
-		<section class="block flip" id="progress">
+		<section class="block flip" id="play">
 			<div class="wrap">
 				<div class="media rv">
-					<div class="device">
-						<div class="shot" data-shot="shot.screenshot|@shot.stats">Screenshot</div>
-					</div>
+					<img src="assets/images/illustration_play_en.webp" data-image-en="assets/images/illustration_play_en.webp" data-image-pt="assets/images/illustration_play_pt.webp" alt="GymNerd play illustration" />
 				</div>
 				<div class="rv d1">
-					<h2 data-i18n="progress.title">Measure progress</h2>
-					<p data-i18n="progress.body">Volume, records and trends per exercise. Green when you are going up, red when you are not. Simple enough to check between sets.</p>
+					<h2 data-i18n="play.title">Play title</h2>
+					<p data-i18n="play.body">Placeholder text for the play section. Replace with the real description.</p>
 					<ul>
-						<li data-i18n="progress.li1">Volume per exercise</li>
-						<li data-i18n="progress.li2">Personal records</li>
-						<li data-i18n="progress.li3">Weekly trends, green up and red down</li>
-						<li data-i18n="progress.li4">Workout streaks</li>
+						<li data-i18n="play.li1">Placeholder point one</li>
+						<li data-i18n="play.li2">Placeholder point two</li>
+						<li data-i18n="play.li3">Placeholder point three</li>
 					</ul>
 				</div>
 			</div>
 		</section>
 
-		<section class="block" id="exercises">
+		<section class="block" id="stats">
 			<div class="wrap">
 				<div class="media rv">
-					<div class="device">
-						<div class="shot" data-shot="shot.screenshot|@shot.library">Screenshot</div>
-					</div>
+					<img src="assets/images/illustration_stats_en.webp" data-image-en="assets/images/illustration_stats_en.webp" data-image-pt="assets/images/illustration_stats_pt.webp" alt="GymNerd stats illustration" />
 				</div>
 				<div class="rv d1">
-					<h2 data-i18n="exercises.title">Find exercises</h2>
-					<p data-i18n="exercises.body">Search by name or muscle group. Add your own when the one you need is missing.</p>
+					<h2 data-i18n="stats.title">Stats title</h2>
+					<p data-i18n="stats.body">Placeholder text for the stats section. Replace with the real description.</p>
 					<ul>
-						<li data-i18n="exercises.li1">Search by name</li>
-						<li data-i18n="exercises.li2">Filter by muscle group</li>
-						<li data-i18n="exercises.li3">Create your own exercises</li>
+						<li data-i18n="stats.li1">Placeholder point one</li>
+						<li data-i18n="stats.li2">Placeholder point two</li>
+						<li data-i18n="stats.li3">Placeholder point three</li>
 					</ul>
 				</div>
 			</div>
 		</section>
 
-		<section class="block flip" id="plan">
+		<section class="block flip" id="measurements">
 			<div class="wrap">
 				<div class="media rv">
-					<div class="device">
-						<div class="shot" data-shot="shot.screenshot|@shot.plan">Screenshot</div>
-					</div>
+					<img src="assets/images/illustration_measurements_en.webp" data-image-en="assets/images/illustration_measurements_en.webp" data-image-pt="assets/images/illustration_measurements_pt.webp" alt="GymNerd measurements illustration" />
 				</div>
 				<div class="rv d1">
-					<h2 data-i18n="plan.title">Plan your week</h2>
-					<p data-i18n="plan.body">Lay out your training days ahead of time and see at a glance what is done, what is next and where you are resting.</p>
+					<h2 data-i18n="measurements.title">Measurements title</h2>
+					<p data-i18n="measurements.body">Placeholder text for the measurements section. Replace with the real description.</p>
 					<ul>
-						<li data-i18n="plan.li1">Plan training days ahead</li>
-						<li data-i18n="plan.li2">See what is done and what is next</li>
-						<li data-i18n="plan.li3">Rest days included</li>
+						<li data-i18n="measurements.li1">Placeholder point one</li>
+						<li data-i18n="measurements.li2">Placeholder point two</li>
+						<li data-i18n="measurements.li3">Placeholder point three</li>
+					</ul>
+				</div>
+			</div>
+		</section>
+
+		<section class="block" id="assistant">
+			<div class="wrap">
+				<div class="media rv">
+					<img src="assets/images/illustration_assistant_en.webp" data-image-en="assets/images/illustration_assistant_en.webp" data-image-pt="assets/images/illustration_assistant_pt.webp" alt="GymNerd assistant illustration" />
+				</div>
+				<div class="rv d1">
+					<h2 data-i18n="assistant.title">Assistant title</h2>
+					<p data-i18n="assistant.body">Placeholder text for the assistant section. Replace with the real description.</p>
+					<ul>
+						<li data-i18n="assistant.li1">Placeholder point one</li>
+						<li data-i18n="assistant.li2">Placeholder point two</li>
+						<li data-i18n="assistant.li3">Placeholder point three</li>
 					</ul>
 				</div>
 			</div>
@@ -596,6 +641,31 @@
 	<script src="i18n.js"></script>
 	<script>
 		(function () {
+			/* language-specific screenshots */
+			function updateImages(lang) {
+				document.querySelectorAll("[data-image-en]").forEach(function (img) {
+					var src = img.getAttribute("data-image-" + lang);
+					if (src) img.src = src;
+				});
+			}
+
+			/* Make the image updater available to i18n.js */
+			window.updateScreenshotLanguage = updateImages;
+
+			/* Update images when the language selector is changed */
+			document.querySelectorAll(".lang button").forEach(function (button) {
+				button.addEventListener("click", function () {
+					updateImages(button.dataset.lang);
+				});
+			});
+
+			/* Set the correct images for the initially selected language */
+			var activeLanguage = document.querySelector('.lang button[aria-pressed="true"]');
+			if (activeLanguage) {
+				updateImages(activeLanguage.dataset.lang);
+			}
+
+
 			/* reveal on scroll */
 			var els = document.querySelectorAll(".rv");
 			if (!("IntersectionObserver" in window)) {
