@@ -258,16 +258,16 @@
 			filter: blur(30px);
 		}
 
-		.hero .media img {
-			position: relative;
+		.hero .device {
+			--screen-h: calc(70vh - 2 * var(--bezel) - 3px);
 			z-index: 1;
-			display: block;
-			width: auto;
-			max-width: 100%;
-			max-height: 70vh;
-			height: auto;
-			object-fit: contain;
+			flex: none;
+			display: flex;
 			filter: drop-shadow(0 0 1px #E4E5E8) drop-shadow(0 20px 40px rgba(0, 0, 0, .5));
+		}
+
+		.hero .device .screen {
+			width: min(78vw, calc(var(--screen-h) * 1280 / 2636));
 		}
 
 		/* sections */
@@ -327,6 +327,254 @@
 			border-radius: var(--radius-l);
 			background: #E4E5E8;
 			box-shadow: 0 24px 60px rgba(0, 0, 0, .45);
+		}
+
+		/* routines phones: container fades with .rv, phones fade in staggered */
+		.block .media.phones {
+			align-items: center;
+			gap: clamp(4px, 1.5vw, 16px);
+			perspective: 1400px;
+			perspective-origin: 50% 50%;
+			position: relative;
+			width: 86%;
+			background: none;
+			box-shadow: none;
+			padding: 0;
+		}
+
+		/* soft light pool behind the phones for contrast */
+		.block .media.phones::before {
+			content: "";
+			position: absolute;
+			left: 50%;
+			top: 50%;
+			width: 85%;
+			aspect-ratio: 1;
+			translate: -50% -50%;
+			background: radial-gradient(circle, rgba(228, 229, 232, .38) 0%, rgba(228, 229, 232, .16) 45%, transparent 70%);
+			filter: blur(36px);
+			pointer-events: none;
+		}
+
+		/* simple 2D device frame; the frame carries tilt, shadow, fade and hover */
+		.device {
+			--bezel: clamp(3px, .9vw, 9px);
+			--corner: clamp(16px, 3.6vw, 40px);
+			flex: 1 1 0;
+			min-width: 0;
+			position: relative;
+			padding: var(--bezel);
+			border-radius: var(--corner);
+			background: #0A0A0C;
+			border: 1.5px solid #3A3A42;
+			box-shadow: inset 0 0 0 1px #000;
+			filter: drop-shadow(0 0 1px #E4E5E8) drop-shadow(0 28px 36px rgba(0, 0, 0, .7)) drop-shadow(0 8px 12px rgba(0, 0, 0, .5));
+			transform-style: preserve-3d;
+			will-change: scale;
+		}
+
+		/* screen window: crops OS status bar (top 140px) and gesture bar (bottom 80px)
+		   out of the 1280x2856 screenshots. ratio = 1280 / (2856 - 140 - 80) */
+		.device .screen {
+			position: relative;
+			overflow: hidden;
+			width: 100%;
+			aspect-ratio: 1280 / 2636;
+			border-radius: calc(var(--corner) - var(--bezel));
+		}
+
+		.device .screen img {
+			position: absolute;
+			top: -5.311%; /* -140 / 2636 */
+			left: 0;
+			display: block;
+			width: 100%;
+			height: auto;
+		}
+
+		.phones .device img {
+			cursor: zoom-in;
+		}
+
+		/* devices tilt toward each other, with a slight lean */
+		.phones .device:nth-child(1) { transform: rotateY(22deg) rotateZ(-3deg) translateY(2%); }
+		.phones .device:nth-child(2) { transform: rotateY(-22deg) rotateZ(3deg) translateY(-2%); }
+
+		.js .phones .device {
+			opacity: 0;
+			transition: opacity .9s var(--ease), scale .22s cubic-bezier(.2, .8, .2, 1);
+		}
+
+		.js .phones.in .device {
+			opacity: 1;
+		}
+
+		.js .phones.in .device:nth-child(1) { transition-delay: .15s, 0s; }
+		.js .phones.in .device:nth-child(2) { transition-delay: .4s, 0s; }
+
+		.block .phones .device:hover {
+			scale: 1.06;
+			z-index: 2;
+		}
+
+		/* stats: framed phone + loose widget cards, floated in perspective */
+		.block .media.stats-art {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			gap: 0;
+			position: relative;
+			background: none;
+			box-shadow: none;
+			padding: 0;
+			perspective: 1600px;
+		}
+
+		.block .media.stats-art::before {
+			content: "";
+			position: absolute;
+			left: 50%;
+			top: 50%;
+			width: 90%;
+			aspect-ratio: 1;
+			translate: -50% -50%;
+			background: radial-gradient(circle, rgba(228, 229, 232, .3) 0%, rgba(228, 229, 232, .12) 45%, transparent 70%);
+			filter: blur(40px);
+			pointer-events: none;
+		}
+
+		.stats-art .device {
+			flex: none;
+			width: min(62%, 280px);
+			z-index: 1;
+			transform: rotateY(10deg);
+		}
+
+		.stats-art .device img,
+		.stats-art .widget {
+			cursor: zoom-in;
+		}
+
+		.stats-art .widget {
+			position: relative;
+			width: 84%;
+			height: auto;
+			margin-top: -6%;
+			border-radius: 5.5% / 6.25%;
+			filter: drop-shadow(0 0 1px #E4E5E8) drop-shadow(0 24px 30px rgba(0, 0, 0, .65)) drop-shadow(0 6px 10px rgba(0, 0, 0, .5));
+			will-change: scale;
+		}
+
+		.assist-art .widget:nth-of-type(1) { border-radius: 5.5% / 14.6%; }
+		.assist-art .widget:nth-of-type(2) { border-radius: 5.5% / 11.2%; }
+
+		.stats-art .widget:nth-of-type(3) { align-self: flex-start; transform: rotateY(-9deg) rotateZ(-1deg); z-index: 4; }
+
+		.measure-art .widget:nth-of-type(1) { border-radius: 5.5% / 5%; }
+		.measure-art .widget:nth-of-type(2) { border-radius: 5.5% / 6.1%; }
+
+		.stats-art .widget:nth-of-type(1) { align-self: flex-start; transform: rotateY(-9deg) rotateZ(-1.5deg); z-index: 2; margin-top: 16px; }
+		.stats-art .widget:nth-of-type(2) { align-self: flex-end; transform: rotateY(9deg) rotateZ(1.5deg); z-index: 3; }
+
+		.js .stats-art .device,
+		.js .stats-art .widget {
+			opacity: 0;
+			transition: opacity .9s var(--ease), scale .22s cubic-bezier(.2, .8, .2, 1);
+		}
+
+		.js .stats-art.in .device,
+		.js .stats-art.in .widget {
+			opacity: 1;
+		}
+
+		.js .stats-art.in .device { transition-delay: .1s, 0s; }
+		.js .stats-art.in .widget:nth-of-type(1) { transition-delay: .35s, 0s; }
+		.js .stats-art.in .widget:nth-of-type(2) { transition-delay: .6s, 0s; }
+		.js .stats-art.in .widget:nth-of-type(3) { transition-delay: .85s, 0s; }
+
+		.block .stats-art .device:hover,
+		.block .stats-art .widget:hover {
+			scale: 1.05;
+			z-index: 6;
+		}
+
+		/* fullscreen image viewer */
+		.block .media:not(.phones):not(.stats-art) img {
+			cursor: zoom-in;
+			transition: scale .22s cubic-bezier(.2, .8, .2, 1);
+			will-change: scale;
+		}
+
+		.block .media:not(.phones):not(.stats-art) img:hover {
+			scale: 1.03;
+		}
+
+		.viewer {
+			border: 0;
+			padding: 0;
+			margin: 0;
+			width: 100vw;
+			height: 100vh;
+			max-width: none;
+			max-height: none;
+			background: rgba(8, 8, 10, .92);
+			-webkit-backdrop-filter: blur(10px);
+			backdrop-filter: blur(10px);
+			cursor: zoom-out;
+		}
+
+		.viewer[open] {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			animation: viewer-in .25s var(--ease);
+		}
+
+		.viewer-stage {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+
+		/* framed screenshot in the viewer: same frame + cropped screen, sized to the viewport */
+		.viewer .device {
+			--bezel: 10px;
+			--corner: 46px;
+			--gap: 28px; /* same inset as the close button */
+			--screen-h: min(calc(100vh - 2 * var(--gap) - 2 * var(--bezel) - 3px), calc((100vw - 2 * var(--gap) - 2 * var(--bezel) - 3px) * 2636 / 1280));
+			flex: none;
+			filter: drop-shadow(0 0 1px #E4E5E8) drop-shadow(0 24px 48px rgba(0, 0, 0, .6));
+		}
+
+		.viewer .device .screen {
+			width: calc(var(--screen-h) * 1280 / 2636);
+		}
+
+		.viewer-stage > img {
+			max-width: 94vw;
+			max-height: 94vh;
+			object-fit: contain;
+			filter: drop-shadow(0 0 1px #E4E5E8) drop-shadow(0 24px 48px rgba(0, 0, 0, .6));
+		}
+
+		.viewer button {
+			position: absolute;
+			top: max(28px, env(safe-area-inset-top));
+			right: max(28px, env(safe-area-inset-right));
+			width: 44px;
+			height: 44px;
+			border: 1px solid var(--surface-stroke);
+			border-radius: 50%;
+			background: rgba(255, 255, 255, .08);
+			color: var(--text);
+			font-size: 22px;
+			line-height: 1;
+			cursor: pointer;
+		}
+
+		@keyframes viewer-in {
+			from { opacity: 0; }
+			to { opacity: 1; }
 		}
 
 		/* closing */
@@ -445,14 +693,16 @@
 				margin-right: 24px;
 			}
 
-			.hero .media img {
-				display: block;
+			.hero .device {
+				height: 100%;
+				max-height: 100%;
+			}
+
+			.hero .device .screen {
 				width: auto;
 				height: 100%;
-				max-width: 100%;
-				max-height: 100%;
-				object-fit: contain;
 			}
+
 
 
 			.block {
@@ -467,6 +717,86 @@
 
 			.block.flip .wrap {
 				grid-template-columns: 1fr 1.8fr;
+			}
+
+			/* stats art: phone on the left, widgets cascading right */
+			.block .media.stats-art {
+				display: block;
+				aspect-ratio: 1.15;
+			}
+
+			.stats-art .device {
+				position: absolute;
+				left: 0;
+				top: 50%;
+				width: 36%;
+				translate: 0 -50%;
+				transform: rotateY(16deg) rotateZ(-2deg);
+			}
+
+			/* widgets pop out of the phone at different depths and angles */
+			.stats-art .widget {
+				position: absolute;
+				width: 48%;
+				margin: 0;
+			}
+
+			.stats-art .widget:nth-of-type(1) {
+				left: 33%;
+				top: -2%;
+				transform: translateZ(90px) rotateY(-20deg) rotateX(6deg) rotateZ(4deg);
+			}
+
+			.stats-art .widget:nth-of-type(2) {
+				left: 46%;
+				top: 46%;
+				transform: translateZ(170px) rotateY(-20deg) rotateX(-5deg) rotateZ(-4deg);
+			}
+
+			/* measurements: phone centered, widgets on opposite diagonal corners */
+			.measure-art .device {
+				left: 31%;
+				right: auto;
+				width: 36%;
+				transform: rotateZ(-2deg);
+			}
+
+			.measure-art .widget:nth-of-type(1) {
+				left: 0;
+				top: 3%;
+				width: 40%;
+				z-index: 4;
+				transform: translateZ(120px) rotateY(18deg) rotateX(5deg) rotateZ(-4deg);
+			}
+
+			.measure-art .widget:nth-of-type(2) {
+				left: 60%;
+				top: 50%;
+				width: 40%;
+				transform: translateZ(120px) rotateY(-18deg) rotateX(-4deg) rotateZ(3deg);
+			}
+
+			/* assistant: phone centered, two widgets on opposite sides */
+			.assist-art .device {
+				left: 31%;
+				width: 36%;
+				transform: rotateZ(2deg);
+			}
+
+			.assist-art .widget:nth-of-type(1) {
+				left: 0;
+				top: 2%;
+				width: 44%;
+				z-index: 4;
+				transform: translateZ(130px) rotateY(18deg) rotateX(5deg) rotateZ(-4deg);
+			}
+
+			.assist-art .widget:nth-of-type(2) {
+				left: 58%;
+				top: 28%;
+				width: 42%;
+				z-index: 3;
+				transform: translateZ(100px) rotateY(-18deg) rotateX(-3deg) rotateZ(3deg);
 			}
 
 			.block.flip .media {
@@ -510,20 +840,19 @@
 				</div>
 
 				<div class="media">
-					<img
-						id="live"
-						src="assets/images/illustration_home_en.webp"
-						data-image-en="assets/images/illustration_home_en.webp"
-						data-image-pt="assets/images/illustration_home_pt.webp"
-						alt="GymNerd app"/>
+					<div class="device"><div class="screen"><img
+							id="live"
+							src="assets/images/home.png"
+							alt="GymNerd app"/></div></div>
 				</div>
 			</div>
 		</section>
 
 		<section class="block" id="routines">
 			<div class="wrap">
-				<div class="media rv">
-					<img src="assets/images/illustration_routines_en.webp" data-image-en="assets/images/illustration_routines_en.webp" data-image-pt="assets/images/illustration_routines_pt.webp" alt="GymNerd routines illustration" />
+				<div class="media phones rv">
+					<div class="device"><div class="screen"><img src="assets/images/routines_1.png" alt="GymNerd routines screen 1" /></div></div>
+					<div class="device"><div class="screen"><img src="assets/images/routines_2.png" alt="GymNerd routines screen 2" /></div></div>
 				</div>
 				<div class="rv d1">
 					<h2 data-i18n="routines.title">Routines title</h2>
@@ -539,8 +868,9 @@
 
 		<section class="block flip" id="play">
 			<div class="wrap">
-				<div class="media rv">
-					<img src="assets/images/illustration_play_en.webp" data-image-en="assets/images/illustration_play_en.webp" data-image-pt="assets/images/illustration_play_pt.webp" alt="GymNerd play illustration" />
+				<div class="media phones rv">
+					<div class="device"><div class="screen"><img src="assets/images/player_1.png" alt="GymNerd player screen 1" /></div></div>
+					<div class="device"><div class="screen"><img src="assets/images/player_2.png" alt="GymNerd player screen 2" /></div></div>
 				</div>
 				<div class="rv d1">
 					<h2 data-i18n="play.title">Play title</h2>
@@ -556,8 +886,10 @@
 
 		<section class="block" id="stats">
 			<div class="wrap">
-				<div class="media rv">
-					<img src="assets/images/illustration_stats_en.webp" data-image-en="assets/images/illustration_stats_en.webp" data-image-pt="assets/images/illustration_stats_pt.webp" alt="GymNerd stats illustration" />
+				<div class="media stats-art rv">
+					<div class="device"><div class="screen"><img src="assets/images/stats_1.png" alt="GymNerd statistics screen" /></div></div>
+					<img class="widget" src="assets/images/stats_widget_1.png" alt="Progress per muscle group" />
+					<img class="widget" src="assets/images/stats_widget_2.png" alt="Exercise weight progression chart" />
 				</div>
 				<div class="rv d1">
 					<h2 data-i18n="stats.title">Stats title</h2>
@@ -573,8 +905,10 @@
 
 		<section class="block flip" id="measurements">
 			<div class="wrap">
-				<div class="media rv">
-					<img src="assets/images/illustration_measurements_en.webp" data-image-en="assets/images/illustration_measurements_en.webp" data-image-pt="assets/images/illustration_measurements_pt.webp" alt="GymNerd measurements illustration" />
+				<div class="media stats-art measure-art rv">
+					<div class="device"><div class="screen"><img src="assets/images/measurements.png" alt="GymNerd weight history screen" /></div></div>
+					<img class="widget" src="assets/images/measurements._widget_1.png" alt="Log weight with a scrolling ruler" />
+					<img class="widget" src="assets/images/measurements._widget_2.png" alt="Weight progress chart" />
 				</div>
 				<div class="rv d1">
 					<h2 data-i18n="measurements.title">Measurements title</h2>
@@ -590,8 +924,10 @@
 
 		<section class="block" id="assistant">
 			<div class="wrap">
-				<div class="media rv">
-					<img src="assets/images/illustration_assistant_en.webp" data-image-en="assets/images/illustration_assistant_en.webp" data-image-pt="assets/images/illustration_assistant_pt.webp" alt="GymNerd assistant illustration" />
+				<div class="media stats-art assist-art rv">
+					<div class="device"><div class="screen"><img src="assets/images/assistant.png" alt="GymNerd onboarding goal screen" /></div></div>
+					<img class="widget" src="assets/images/assistant_widget_1.png" alt="Mascot motivating you to set a new record" />
+					<img class="widget" src="assets/images/assistant_widget_2.png" alt="Mascot telling you that you can do better" />
 				</div>
 				<div class="rv d1">
 					<h2 data-i18n="assistant.title">Assistant title</h2>
@@ -625,33 +961,45 @@
 		</div>
 	</footer>
 
+	<dialog class="viewer" id="viewer" aria-label="Image viewer">
+		<div class="viewer-stage"></div>
+		<button type="button" aria-label="Close">&times;</button>
+	</dialog>
+
 	<script src="i18n.js"></script>
 	<script>
 		(function () {
-			/* language-specific screenshots */
-			function updateImages(lang) {
-				document.querySelectorAll("[data-image-en]").forEach(function (img) {
-					var src = img.getAttribute("data-image-" + lang);
-					if (src) img.src = src;
+			/* fullscreen image viewer */
+			var viewer = document.getElementById("viewer");
+			if (viewer && viewer.showModal) {
+				var stage = viewer.querySelector(".viewer-stage");
+				document.querySelectorAll(".block .media img").forEach(function (img) {
+					img.tabIndex = 0;
+					img.setAttribute("role", "button");
+					var open = function () {
+						var device = img.closest(".device");
+						var content;
+						if (device) {
+							/* keep the device frame and cropped screen */
+							content = device.cloneNode(true);
+							var inner = content.querySelector("img");
+							inner.removeAttribute("tabindex");
+							inner.removeAttribute("role");
+						} else {
+							content = document.createElement("img");
+							content.src = img.currentSrc || img.src;
+							content.alt = img.alt;
+						}
+						stage.replaceChildren(content);
+						viewer.showModal();
+					};
+					img.addEventListener("click", open);
+					img.addEventListener("keydown", function (e) {
+						if (e.key === "Enter" || e.key === " ") { e.preventDefault(); open(); }
+					});
 				});
+				viewer.addEventListener("click", function () { viewer.close(); });
 			}
-
-			/* Make the image updater available to i18n.js */
-			window.updateScreenshotLanguage = updateImages;
-
-			/* Update images when the language selector is changed */
-			document.querySelectorAll(".lang button").forEach(function (button) {
-				button.addEventListener("click", function () {
-					updateImages(button.dataset.lang);
-				});
-			});
-
-			/* Set the correct images for the initially selected language */
-			var activeLanguage = document.querySelector('.lang button[aria-pressed="true"]');
-			if (activeLanguage) {
-				updateImages(activeLanguage.dataset.lang);
-			}
-
 
 			/* reveal on scroll */
 			var els = document.querySelectorAll(".rv");
