@@ -1,0 +1,1362 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>GymNerd</title>
+	<meta name="description" content="GymNerd is a workout tracker for people who like their numbers." />
+	<meta name="theme-color" content="#0E0E10" />
+	<link rel="icon" type="image/svg+xml" href="assets/Play-App-Icon.svg" />
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700&family=JetBrains+Mono:wght@500;700&family=Manrope:wght@800&display=swap" rel="stylesheet" />
+	<script>document.documentElement.classList.add("js");</script>
+	<style>
+		:root {
+			--background: #0E0E10;
+			--surface: #15151A;
+			--surface-2: #1B1B22;
+			--surface-stroke: #1F1F26;
+			--row: #161616;
+			--border: #2A2A30;
+			--outline: #333350;
+			--primary: #F2C24B;
+			--on-primary: #000;
+			--text: #fff;
+			--text-2: #B0B0C0;
+			--text-3: #666680;
+			--positive: #4CAF6D;
+			--negative: #E5544D;
+			--radius-s: 8px;
+			--radius-m: 12px;
+			--radius-l: 16px;
+			--mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+			--ease: cubic-bezier(.2, .7, .2, 1);
+		}
+
+		* {
+			box-sizing: border-box;
+			margin: 0;
+			padding: 0;
+		}
+
+		html {
+			-webkit-text-size-adjust: 100%;
+			scroll-behavior: smooth;
+		}
+
+		body {
+			background: var(--background);
+			color: var(--text);
+			font-family: "Inter", system-ui, sans-serif;
+			font-weight: 500;
+			font-size: 16px;
+			line-height: 1.6;
+			-webkit-font-smoothing: antialiased;
+			overflow-x: hidden;
+		}
+
+		a {
+			color: inherit;
+		}
+
+		h1,
+		h2,
+		.wordmark {
+			font-family: "Manrope", "Inter", sans-serif;
+			font-weight: 800;
+			line-height: 1.05;
+			letter-spacing: -.03em;
+		}
+
+		.num {
+			font-family: var(--mono);
+			font-variant-numeric: tabular-nums;
+		}
+
+		.wrap {
+			width: 100%;
+			max-width: 1120px;
+			margin: 0 auto;
+			padding: 0 clamp(20px, 5vw, 72px);
+		}
+
+		/* header */
+		.top {
+			position: sticky;
+			top: 0;
+			z-index: 20;
+			background: rgba(14, 14, 16, .78);
+			-webkit-backdrop-filter: blur(14px);
+			backdrop-filter: blur(14px);
+			border-bottom: 1px solid var(--surface-stroke);
+		}
+
+		.top .wrap {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			height: 64px;
+		}
+
+		.wordmark {
+			display: inline-flex;
+			align-items: center;
+			gap: 10px;
+			font-size: 21px;
+			letter-spacing: -.02em;
+			text-decoration: none;
+		}
+
+		.wordmark img {
+			height: 22px;
+			width: auto;
+		}
+
+		.top-right {
+			display: flex;
+			align-items: center;
+			gap: 18px;
+		}
+
+		.top-cta {
+			font-size: 14px;
+			font-weight: 600;
+			text-decoration: none;
+			color: var(--text-2);
+			display: none;
+		}
+
+		.top-cta:hover {
+			color: var(--primary);
+		}
+
+		.lang {
+			display: inline-flex;
+			border: 1px solid var(--outline);
+			border-radius: 999px;
+			overflow: hidden;
+		}
+
+		.lang button {
+			background: transparent;
+			border: 0;
+			color: var(--text-2);
+			font: inherit;
+			font-size: 12px;
+			font-weight: 700;
+			letter-spacing: 1px;
+			padding: 5px 11px;
+			cursor: pointer;
+		}
+
+		.lang button[aria-pressed="true"] {
+			background: var(--primary);
+			color: var(--on-primary);
+		}
+
+		/* store badges */
+		.badges {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 12px;
+			align-items: center;
+		}
+
+		.badge {
+			display: inline-flex;
+			transition: transform .2s var(--ease);
+		}
+
+		.badge:hover {
+			transform: translateY(-2px);
+		}
+
+		.badge img {
+			display: block;
+			height: 48px;
+			width: auto;
+		}
+
+		/* hero */
+		.hero {
+			position: relative;
+			padding: 56px 0 72px;
+			overflow: hidden;
+		}
+
+		.hero::before {
+			content: "";
+			position: absolute;
+			inset: 0;
+			background-image:
+				linear-gradient(to right, rgba(255, 255, 255, .04) 1px, transparent 1px),
+				linear-gradient(to bottom, rgba(255, 255, 255, .04) 1px, transparent 1px);
+			background-size: 56px 56px;
+			background-position: center top;
+			-webkit-mask-image: radial-gradient(ellipse 80% 70% at 70% 40%, #000 20%, transparent 75%);
+			mask-image: radial-gradient(ellipse 80% 70% at 70% 40%, #000 20%, transparent 75%);
+			pointer-events: none;
+		}
+
+		.hero .wrap {
+			position: relative;
+			display: grid;
+			grid-template-columns: 1fr;
+			gap: 56px;
+			align-items: center;
+		}
+
+		.hero h1 {
+			font-size: clamp(42px, 11vw, 80px);
+			margin-bottom: 24px;
+		}
+
+		.hero h1 em {
+			font-style: normal;
+			color: var(--primary);
+		}
+
+		/* lead + mantra flow as one paragraph: dim setup, then the gold mantra on the same line */
+		.hero .copy {
+			max-width: 460px;
+			margin-bottom: 48px;
+			font-size: clamp(18px, 4.8vw, 21px);
+			line-height: 1.5;
+		}
+
+		.hero .copy p {
+			display: inline;
+		}
+
+		.hero p.lead {
+			color: var(--text-2);
+		}
+
+		.hero p.mantra {
+			color: var(--primary);
+			font-weight: 600;
+		}
+
+		.hero p.mantra em {
+			font-style: normal;
+			color: var(--primary);
+		}
+
+		.hero .media {
+			justify-self: center;
+			position: relative;
+			width: 100%;
+			max-height: 70vh;
+			display: flex;
+			justify-content: center;
+		}
+
+		/* Glow behind the dark hero image so it separates from the dark page. */
+		.hero .media::before {
+			content: "";
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			border-radius: 50%;
+			pointer-events: none;
+		}
+
+		.hero .media::before {
+			width: 90%;
+			aspect-ratio: 1;
+			translate: -50% -50%;
+			background: radial-gradient(circle, #E4E5E8 0%, rgba(228, 229, 232, .6) 45%, transparent 70%);
+			filter: blur(30px);
+		}
+
+		.hero .device {
+			--screen-h: calc(70vh - 2 * var(--bezel) - 3px);
+			z-index: 1;
+			flex: none;
+			display: flex;
+			filter: drop-shadow(0 0 1px #E4E5E8) drop-shadow(0 20px 40px rgba(0, 0, 0, .5));
+		}
+
+		.hero .device .screen {
+			width: min(78vw, calc(var(--screen-h) * 1280 / 2636));
+		}
+
+		/* happy flame mascot: desktop only */
+		.hero .flame {
+			display: none;
+		}
+
+		/* sections */
+		.block {
+			padding: 96px 0;
+			border-top: 1px solid var(--surface-stroke);
+		}
+
+		.block .wrap {
+			display: grid;
+			grid-template-columns: 1fr;
+			gap: 44px;
+			align-items: center;
+		}
+
+		.block h2 {
+			font-size: clamp(30px, 6vw, 44px);
+			margin-bottom: 18px;
+		}
+
+		.block p {
+			color: var(--text-2);
+			max-width: 460px;
+		}
+
+		.block ul {
+			list-style: none;
+			margin-top: 32px;
+			display: grid;
+			gap: 18px;
+		}
+
+		.block li {
+			display: flex;
+			align-items: center;
+			gap: 16px;
+			color: var(--text);
+			font-size: 18px;
+			line-height: 1.35;
+		}
+
+		.block li::before {
+			content: "";
+			flex: none;
+			width: 28px;
+			height: 28px;
+			border-radius: 50%;
+			background: var(--primary) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6.5 12.5l3.5 3.5 7.5-8'/%3E%3C/svg%3E") center / 16px no-repeat;
+		}
+
+		.block .media {
+			justify-self: center;
+			width: 100%;
+			display: flex;
+			justify-content: center;
+			padding: clamp(8px, 2vw, 16px);
+			border-radius: var(--radius-l);
+			background: #E4E5E8;
+			box-shadow: 0 24px 60px rgba(0, 0, 0, .45);
+		}
+
+		/* routines phones: container fades with .rv, phones fade in staggered */
+		.block .media.phones {
+			align-items: center;
+			gap: clamp(4px, 1.5vw, 16px);
+			perspective: 1400px;
+			perspective-origin: 50% 50%;
+			position: relative;
+			width: 76%;
+			background: none;
+			box-shadow: none;
+			padding: 0;
+		}
+
+		/* soft light pool behind the phones for contrast */
+		.block .media.phones::before {
+			content: "";
+			position: absolute;
+			left: 50%;
+			top: 50%;
+			width: 85%;
+			aspect-ratio: 1;
+			translate: -50% -50%;
+			background: radial-gradient(circle, rgba(228, 229, 232, .38) 0%, rgba(228, 229, 232, .16) 45%, transparent 70%);
+			filter: blur(36px);
+			pointer-events: none;
+		}
+
+		/* simple 2D device frame; the frame carries tilt, shadow, fade and hover */
+		.device {
+			--bezel: clamp(3px, .9vw, 9px);
+			--corner: clamp(16px, 3.6vw, 40px);
+			flex: 1 1 0;
+			min-width: 0;
+			position: relative;
+			padding: var(--bezel);
+			border-radius: var(--corner);
+			background: #0A0A0C;
+			border: 1.5px solid #3A3A42;
+			box-shadow: inset 0 0 0 1px #000;
+			filter: drop-shadow(0 0 1px #E4E5E8) drop-shadow(0 28px 36px rgba(0, 0, 0, .7)) drop-shadow(0 8px 12px rgba(0, 0, 0, .5));
+			transform-style: preserve-3d;
+			will-change: scale;
+		}
+
+		/* screen window: crops OS status bar (top 140px) and gesture bar (bottom 80px)
+		   out of the 1280x2856 screenshots. ratio = 1280 / (2856 - 140 - 80) */
+		.device .screen {
+			position: relative;
+			overflow: hidden;
+			width: 100%;
+			aspect-ratio: 1280 / 2636;
+			border-radius: calc(var(--corner) - var(--bezel));
+		}
+
+		.device .screen img {
+			position: absolute;
+			top: -5.311%; /* -140 / 2636 */
+			left: 0;
+			display: block;
+			width: 100%;
+			height: auto;
+		}
+
+		.phones .device img {
+			cursor: zoom-in;
+		}
+
+		/* devices tilt toward each other, with a slight lean */
+		.phones .device:nth-child(1) { transform: rotateY(22deg) rotateZ(-3deg) translateY(2%); }
+		.phones .device:nth-child(2) { transform: rotateY(-22deg) rotateZ(3deg) translateY(-2%); }
+
+		.js .phones .device {
+			opacity: 0;
+			transition: opacity .9s var(--ease), scale .22s cubic-bezier(.2, .8, .2, 1);
+		}
+
+		.js .phones.in .device {
+			opacity: 1;
+		}
+
+		.js .phones.in .device:nth-child(1) { transition-delay: .15s, 0s; }
+		.js .phones.in .device:nth-child(2) { transition-delay: .4s, 0s; }
+
+		.block .phones .device:hover {
+			scale: 1.06;
+			z-index: 2;
+		}
+
+		/* stats: framed phone + loose widget cards, floated in perspective */
+		.block .media.stats-art {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			gap: 0;
+			position: relative;
+			background: none;
+			box-shadow: none;
+			padding: 0;
+			perspective: 1600px;
+		}
+
+		.block .media.stats-art::before {
+			content: "";
+			position: absolute;
+			left: 50%;
+			top: 50%;
+			width: 90%;
+			aspect-ratio: 1;
+			translate: -50% -50%;
+			background: radial-gradient(circle, rgba(228, 229, 232, .16) 0%, rgba(228, 229, 232, .06) 40%, transparent 65%);
+			filter: blur(44px);
+			pointer-events: none;
+		}
+
+		.stats-art .device {
+			flex: none;
+			width: min(62%, 280px);
+			z-index: 1;
+			transform: rotateY(10deg);
+		}
+
+		.stats-art .device img,
+		.stats-art .widget {
+			cursor: zoom-in;
+		}
+
+		.stats-art .widget {
+			position: relative;
+			width: 84%;
+			height: auto;
+			margin-top: -6%;
+			border-radius: 5.5% / 6.25%;
+			filter: drop-shadow(0 0 1px #E4E5E8) drop-shadow(0 24px 30px rgba(0, 0, 0, .65)) drop-shadow(0 6px 10px rgba(0, 0, 0, .5));
+			will-change: scale;
+		}
+
+		.assist-art .widget:nth-of-type(1) { border-radius: 5.5% / 14.6%; }
+		.assist-art .widget:nth-of-type(2) { border-radius: 5.5% / 11.2%; }
+
+		.stats-art .widget:nth-of-type(3) { align-self: flex-start; transform: rotateY(-9deg) rotateZ(-1deg); z-index: 4; }
+
+		.measure-art .widget:nth-of-type(1) { border-radius: 5.5% / 6.1%; }
+		.measure-art .widget:nth-of-type(2) { border-radius: 5.5% / 5%; }
+
+		.stats-art .widget:nth-of-type(1) { align-self: flex-start; transform: rotateY(-9deg) rotateZ(-1.5deg); z-index: 2; margin-top: 16px; }
+		.stats-art .widget:nth-of-type(2) { align-self: flex-end; transform: rotateY(9deg) rotateZ(1.5deg); z-index: 3; }
+
+		.js .stats-art .device,
+		.js .stats-art .widget {
+			opacity: 0;
+			transition: opacity .9s var(--ease), scale .22s cubic-bezier(.2, .8, .2, 1);
+		}
+
+		.js .stats-art.in .device,
+		.js .stats-art.in .widget {
+			opacity: 1;
+		}
+
+		.js .stats-art.in .device { transition-delay: .1s, 0s; }
+		.js .stats-art.in .widget:nth-of-type(1) { transition-delay: .35s, 0s; }
+		.js .stats-art.in .widget:nth-of-type(2) { transition-delay: .6s, 0s; }
+		.js .stats-art.in .widget:nth-of-type(3) { transition-delay: .85s, 0s; }
+
+		.block .stats-art .device:hover,
+		.block .stats-art .widget:hover {
+			scale: 1.05;
+			z-index: 6;
+		}
+
+		/* fullscreen image viewer */
+		.block .media:not(.phones):not(.stats-art) img {
+			cursor: zoom-in;
+			transition: scale .22s cubic-bezier(.2, .8, .2, 1);
+			will-change: scale;
+		}
+
+		.block .media:not(.phones):not(.stats-art) img:hover {
+			scale: 1.03;
+		}
+
+		.viewer {
+			border: 0;
+			padding: 0;
+			margin: 0;
+			width: 100vw;
+			height: 100vh;
+			max-width: none;
+			max-height: none;
+			background: rgba(8, 8, 10, .92);
+			-webkit-backdrop-filter: blur(10px);
+			backdrop-filter: blur(10px);
+			cursor: zoom-out;
+		}
+
+		.viewer[open] {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			animation: viewer-in .25s var(--ease);
+		}
+
+		.viewer {
+			--nav-x: 100px; /* side room kept clear for the prev/next buttons */
+			--nav-y: 0px;
+		}
+
+		.viewer.single {
+			--nav-x: 0px;
+		}
+
+		.viewer-stage {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+
+		/* framed screenshot in the viewer: same frame + cropped screen, sized to the viewport */
+		.viewer .device {
+			--bezel: 10px;
+			--corner: 46px;
+			--gap: 28px; /* same inset as the close button */
+			--screen-h: min(calc(100vh - 2 * var(--gap) - var(--nav-y) - 2 * var(--bezel) - 3px), calc((100vw - 2 * var(--nav-x) - 2 * var(--bezel) - 3px) * 2636 / 1280));
+			flex: none;
+			filter: drop-shadow(0 0 1px #E4E5E8) drop-shadow(0 24px 48px rgba(0, 0, 0, .6));
+		}
+
+		.viewer .device .screen {
+			width: calc(var(--screen-h) * 1280 / 2636);
+		}
+
+		.viewer-stage > img {
+			max-width: calc(100vw - 2 * max(var(--nav-x), 3vw));
+			max-height: calc(94vh - var(--nav-y));
+			object-fit: contain;
+			filter: drop-shadow(0 0 1px #E4E5E8) drop-shadow(0 24px 48px rgba(0, 0, 0, .6));
+		}
+
+		.viewer button {
+			position: absolute;
+			top: max(28px, env(safe-area-inset-top));
+			right: max(28px, env(safe-area-inset-right));
+			width: 44px;
+			height: 44px;
+			border: 1px solid var(--surface-stroke);
+			border-radius: 50%;
+			background: rgba(255, 255, 255, .08);
+			color: var(--text);
+			font-size: 22px;
+			line-height: 1;
+			cursor: pointer;
+		}
+
+		.viewer button.nav {
+			top: 50%;
+			translate: 0 -50%;
+			font-size: 26px;
+			padding-bottom: 3px;
+		}
+
+		.viewer button.prev {
+			left: max(28px, env(safe-area-inset-left));
+			right: auto;
+		}
+
+		.viewer button.next {
+			right: max(28px, env(safe-area-inset-right));
+		}
+
+		.viewer button:hover {
+			background: rgba(255, 255, 255, .16);
+		}
+
+		.viewer .dots {
+			position: absolute;
+			bottom: 10px;
+			left: 50%;
+			translate: -50% 0;
+			display: flex;
+			gap: 8px;
+		}
+
+		.viewer .dots i {
+			width: 7px;
+			height: 7px;
+			border-radius: 50%;
+			background: rgba(255, 255, 255, .3);
+			transition: background .2s, scale .2s;
+		}
+
+		.viewer .dots i.on {
+			background: #fff;
+			scale: 1.25;
+		}
+
+		.viewer.single .nav,
+		.viewer.single .dots {
+			display: none;
+		}
+
+		/* narrow screens: buttons drop to the bottom corners, image keeps the full width */
+		@media (max-width: 700px) {
+			.viewer {
+				--nav-x: 12px;
+				--nav-y: 72px;
+				box-sizing: border-box;
+				padding-bottom: var(--nav-y);
+			}
+
+			.viewer.single {
+				--nav-y: 0px;
+				padding-bottom: 0;
+			}
+
+			.viewer button.nav {
+				top: auto;
+				bottom: 14px;
+				translate: none;
+			}
+
+			.viewer button.prev { left: 16px; }
+			.viewer button.next { right: 16px; }
+		}
+
+		@keyframes viewer-in {
+			from { opacity: 0; }
+			to { opacity: 1; }
+		}
+
+		/* closing */
+		.closing {
+			padding: 120px 0 112px;
+			border-top: 1px solid var(--surface-stroke);
+			text-align: center;
+			position: relative;
+			overflow: hidden;
+		}
+
+		.closing .app-icon {
+			width: 152px;
+			height: 152px;
+			border-radius: 36px;
+			margin-bottom: 36px;
+		}
+
+		.closing h2 {
+			font-size: clamp(34px, 8vw, 64px);
+			max-width: 14em;
+			margin: 0 auto 36px;
+		}
+
+		.closing h2 em {
+			font-style: normal;
+		}
+
+		.closing .badges {
+			justify-content: center;
+		}
+
+		footer {
+			border-top: 1px solid var(--surface-stroke);
+			padding: 24px 0;
+			font-size: 13px;
+			color: var(--text-3);
+		}
+
+		footer .wrap {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 8px 24px;
+			justify-content: space-between;
+		}
+
+		footer a {
+			text-decoration: none;
+		}
+
+		footer a:hover {
+			color: var(--text-2);
+		}
+
+		/* reveal */
+		.js .rv {
+			opacity: 0;
+			transform: translateY(24px);
+			transition: opacity .8s var(--ease), transform .8s var(--ease);
+		}
+
+		.js .rv.in {
+			opacity: 1;
+			transform: none;
+		}
+
+		.js .rv.d1 {
+			transition-delay: .12s;
+		}
+
+		@media (prefers-reduced-motion: reduce) {
+			html {
+				scroll-behavior: auto;
+			}
+
+			.js .rv,
+			.js .bar i {
+				transition: none !important;
+				opacity: 1;
+				transform: none !important;
+			}
+		}
+
+		/* wider screens */
+		@media (min-width: 520px) {
+			.top-cta {
+				display: inline;
+			}
+		}
+
+		/* scroll-down arrow */
+		.hero .scroll-down {
+			position: absolute;
+			left: 50%;
+			bottom: 16px;
+			z-index: 3;
+			translate: -50% 0;
+			width: 44px;
+			height: 44px;
+			display: grid;
+			place-items: center;
+			color: var(--text-2);
+			border-radius: 50%;
+			animation: hero-bob 2s ease-in-out infinite;
+		}
+
+		.hero .scroll-down:hover {
+			color: var(--primary);
+		}
+
+		.hero .scroll-down svg {
+			width: 26px;
+			height: 26px;
+		}
+
+		@keyframes hero-bob {
+			0%, 100% { transform: translateY(0); }
+			50% { transform: translateY(6px); }
+		}
+
+		@media (prefers-reduced-motion: reduce) {
+			.hero .scroll-down { animation: none; }
+		}
+
+		/* mobile hero: fills the viewport; image on top (cropped), text overlaps its bottom edge */
+		@media (max-width: 859px) {
+			.hero {
+				display: flex;
+				flex-direction: column;
+				min-height: calc(100vh - 64px);
+				min-height: calc(100svh - 64px);
+				padding: 24px 0 72px;
+			}
+
+			.hero .wrap {
+				flex: 1;
+				grid-template-rows: minmax(0, 1fr) auto;
+				gap: 0;
+			}
+
+			.hero .media {
+				order: -1;
+				align-self: stretch;
+				max-height: none;
+				/* image is absolutely positioned so it never sets the height;
+				   media takes the leftover space, with a floor so text + arrow always fit */
+				min-height: 180px;
+				overflow: hidden;
+				/* grow the clip box up into the hero padding so the glow isn't cut by a hard edge, then fade the top out */
+				margin-top: -24px;
+				padding-top: 24px;
+				-webkit-mask-image: linear-gradient(to bottom, transparent, #000 48px, #000 calc(100% - 96px), transparent calc(100% - 48px));
+				mask-image: linear-gradient(to bottom, transparent, #000 48px, #000 calc(100% - 96px), transparent calc(100% - 48px));
+			}
+
+			/* softer glow on mobile: faint, wide, no hard white core */
+			.hero .media::before {
+				top: 30%;
+				background: radial-gradient(circle, rgba(228, 229, 232, .16) 0%, rgba(228, 229, 232, .06) 45%, transparent 70%);
+				filter: blur(40px);
+			}
+
+			.hero .device {
+				position: absolute;
+				top: 56px;
+				left: 50%;
+				translate: -50% 0;
+				width: max-content;
+				max-width: none;
+			}
+
+			.hero .wrap > div:first-child {
+				position: relative;
+				z-index: 2;
+				align-self: end;
+				margin-top: -64px;
+			}
+		}
+
+		/* mobile sections: like the hero, image on top fading into the text, but no viewport
+		   fitting and no crop, so more of the image shows */
+		@media (max-width: 859px) {
+			.block {
+				padding: 64px 0 80px;
+			}
+
+			.block .wrap {
+				gap: 0;
+			}
+
+			/* mobile: not enough room for every widget, keep phone + second widget */
+			.stats-art .widget:nth-of-type(1),
+			.stats-art .widget:nth-of-type(3) {
+				display: none;
+			}
+
+			/* phone and widget side by side */
+			.block .media.stats-art {
+				flex-direction: row;
+				align-items: center;
+				justify-content: center;
+				gap: 4%;
+			}
+
+			.stats-art .device {
+				width: 40%;
+				transform: rotateY(12deg) rotateZ(-2deg);
+			}
+
+			.measure-art .device {
+				transform: rotateY(-12deg) rotateZ(2deg);
+			}
+
+			.stats-art .widget:nth-of-type(2) {
+				width: 50%;
+				margin: 0;
+				align-self: center;
+			}
+
+			/* overlay instead of a mask: a mask would clip the tilted phones at the top */
+			.block .wrap > .media {
+				position: relative;
+			}
+
+			.block .wrap > .media::after {
+				content: "";
+				position: absolute;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				height: 140px;
+				z-index: 5;
+				pointer-events: none;
+				background: linear-gradient(to bottom, rgba(14, 14, 16, 0) 0%, rgba(14, 14, 16, .6) 40%, rgba(14, 14, 16, .92) 75%, var(--background) 100%);
+			}
+
+			.block .wrap > .media + div {
+				position: relative;
+				z-index: 6;
+				margin-top: -48px;
+				/* dark halo behind the whole text block, so it stays readable over the image */
+				background: rgba(14, 14, 16, .88);
+				box-shadow: 0 0 40px 40px rgba(14, 14, 16, .88);
+				text-shadow: 0 2px 12px rgba(0, 0, 0, .9);
+			}
+		}
+
+		@media (min-width: 860px) {
+			.hero {
+				/* Keep the hero within the viewport instead of letting the
+				   tall portrait image determine the section height. */
+				height: calc(100vh - 64px);
+				height: calc(100svh - 64px);
+				min-height: 560px;
+				padding: 48px 0 80px;
+			}
+
+			.hero .wrap {
+				height: 100%;
+				grid-template-columns: 1.15fr 1fr;
+				gap: 64px;
+				align-items: center;
+			}
+
+			.hero .media {
+				height: 100%;
+				min-height: 0;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				justify-self: end;
+				margin-right: calc(clamp(20px, 5vw, 72px) + 12px); /* flame overhangs the media; leave about the page margin beyond it */
+			}
+
+			.hero .device {
+				position: relative;
+				height: 100%;
+				max-height: 100%;
+			}
+
+			.hero .device .screen {
+				width: auto;
+				height: 100%;
+			}
+
+			.hero .flame {
+				display: block;
+				position: absolute;
+				bottom: 0;
+				left: 100%;
+				height: 38%;
+				width: auto;
+				margin-left: -48px;
+			}
+
+
+
+			.block {
+				padding: 128px 0;
+			}
+
+			.block .wrap {
+				max-width: 1280px;
+				grid-template-columns: 1.8fr 1fr;
+				gap: 56px;
+			}
+
+			.block.flip .wrap {
+				grid-template-columns: 1fr 1.8fr;
+			}
+
+			/* stats art: phone on the left, widgets cascading right */
+			.block .media.stats-art {
+				display: block;
+				width: 88%; /* inset from both column edges so tilted phones/widgets don't hit the page edge */
+				aspect-ratio: 1.15;
+			}
+
+			.stats-art .device {
+				position: absolute;
+				left: 0;
+				top: 50%;
+				width: 36%;
+				translate: 0 -50%;
+				transform: rotateY(16deg) rotateZ(-2deg);
+			}
+
+			/* widgets step out of the phone: clear of it, each one closer to the viewer */
+			.stats-art .widget {
+				position: absolute;
+				width: 36%;
+				margin: 0;
+			}
+
+			.stats-art .widget:nth-of-type(1) {
+				left: 44%;
+				top: 8%;
+				transform: translateZ(60px) rotateY(16deg) rotateX(4deg) rotateZ(-2deg);
+			}
+
+			.stats-art .widget:nth-of-type(2) {
+				left: 60%;
+				top: 40%;
+				transform: translateZ(150px) rotateY(16deg) rotateX(4deg) rotateZ(-2deg);
+			}
+
+			/* measurements: mirror of stats, phone on the right and widgets stepping out to the left */
+			.measure-art .device {
+				left: auto;
+				right: 0;
+				transform: rotateY(-16deg) rotateZ(2deg);
+			}
+
+			.measure-art .widget:nth-of-type(1) {
+				left: 20%;
+				top: 0;
+				transform: translateZ(60px) rotateY(-16deg) rotateX(4deg) rotateZ(2deg);
+			}
+
+			.measure-art .widget:nth-of-type(2) {
+				left: 4%;
+				top: 35%;
+				transform: translateZ(150px) rotateY(-16deg) rotateX(4deg) rotateZ(2deg);
+			}
+
+			/* assistant: same as stats; the widgets are wide and short, so they get more width */
+			.assist-art .widget:nth-of-type(1) {
+				left: 44%;
+				top: 21%;
+				width: 50%;
+			}
+
+			.assist-art .widget:nth-of-type(2) {
+				left: 54%;
+				top: 49%;
+				width: 44%;
+			}
+
+			/* history: widgets are tall + wide, so stack them in the right column without touching */
+			.history-art .widget:nth-of-type(1) {
+				left: 42%;
+				top: 3%;
+				width: 30%;
+				transform: translateZ(40px) rotateY(16deg) rotateX(4deg) rotateZ(-2deg);
+			}
+
+			.history-art .widget:nth-of-type(2) {
+				left: 52%;
+				top: 62%;
+				width: 38%;
+				transform: translateZ(80px) rotateY(16deg) rotateX(4deg) rotateZ(-2deg);
+			}
+
+			.block.flip .media {
+				order: 1;
+			}
+
+			.media img {
+				display: block;
+				width: 100%;
+				height: auto;
+				max-width: 100%;
+			}
+		}
+	</style>
+</head>
+
+<body>
+
+	<header class="top">
+		<div class="wrap">
+			<a href="#" class="wordmark"><img src="assets/Play-App-Icon-Foreground.svg" alt="" />GymNerd</a>
+			<div class="top-right">
+				<div class="lang" role="group" aria-label="Language">
+					<button type="button" data-lang="en" aria-pressed="true">EN</button>
+					<button type="button" data-lang="pt" aria-pressed="false">PT</button>
+				</div>
+			</div>
+		</div>
+	</header>
+
+	<main>
+		<section class="hero">
+			<div class="wrap">
+				<div>
+					<h1 data-i18n="hero.title">Hero Title</h1>
+					<div class="copy">
+						<p class="lead" data-i18n="hero.body">Hero Body</p>
+						<p class="mantra" data-i18n="hero.mantra">Hero Mantra</p>
+					</div>
+					<div class="badges">
+						<a href="#" class="badge" aria-label="Get it on Google Play"><img src="assets/Google_Play_Store_badge_EN.svg" alt="Get it on Google Play" /></a>
+						<!-- <a href="#" class="badge" aria-label="Download on the App Store"><img src="assets/Download_on_the_App_Store_Badge.svg" alt="Download on the App Store" /></a> -->
+					</div>
+				</div>
+
+				<div class="media">
+					<div class="device"><div class="screen"><img
+							id="live"
+							src="assets/images/home.png"
+							alt="GymNerd app"/></div>
+						<img class="flame" src="assets/happy-flame.svg" alt="" aria-hidden="true" />
+					</div>
+				</div>
+			</div>
+			<a href="#routines" class="scroll-down" aria-label="Scroll down">
+				<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+			</a>
+		</section>
+
+		<section class="block" id="routines">
+			<div class="wrap">
+				<div class="media phones rv">
+					<div class="device"><div class="screen"><img src="assets/images/routines_1.png" alt="GymNerd routines screen 1" /></div></div>
+					<div class="device"><div class="screen"><img src="assets/images/routines_2.png" alt="GymNerd routines screen 2" /></div></div>
+				</div>
+				<div class="rv d1">
+					<h2 data-i18n="routines.title">Routines</h2>
+					<p data-i18n="routines.body">Organize your exercises as you see fit.</p>
+					<ul>
+						<li data-i18n="routines.li1">Unlimited routines</li>
+						<li data-i18n="routines.li2">Unlimited exercises</li>
+						<li data-i18n="routines.li3">Create custom exercises</li>
+					</ul>
+				</div>
+			</div>
+		</section>
+
+		<section class="block flip" id="play">
+			<div class="wrap">
+				<div class="media phones rv">
+					<div class="device"><div class="screen"><img src="assets/images/player_1.png" alt="GymNerd player screen 1" /></div></div>
+					<div class="device"><div class="screen"><img src="assets/images/player_2.png" alt="GymNerd player screen 2" /></div></div>
+				</div>
+				<div class="rv d1">
+					<h2 data-i18n="play.title">Workout player</h2>
+					<p data-i18n="play.body">Use the app while you work out.</p>
+					<ul>
+						<li data-i18n="play.li1">Adjust your workout on the fly</li>
+						<li data-i18n="play.li2">Get a workout report at the end</li>
+					</ul>
+				</div>
+			</div>
+		</section>
+
+		<section class="block" id="history">
+			<div class="wrap">
+				<div class="media stats-art history-art rv">
+					<div class="device"><div class="screen"><img src="assets/images/history_1.png" alt="GymNerd history screen" /></div></div>
+					<img class="widget" src="assets/images/history_widget_1.png" alt="Workout history widget 1" />
+					<img class="widget" src="assets/images/history_widget_2.png" alt="Workout history widget 2" />
+				</div>
+				<div class="rv d1">
+					<h2 data-i18n="history.title">History</h2>
+					<p data-i18n="history.body">Look back at every workout you've done.</p>
+					<ul>
+						<li data-i18n="history.li1">Browse your past workouts</li>
+						<li data-i18n="history.li2">See your frequency per month</li>
+						<li data-i18n="history.li3">Add ad-hoc workouts</li>
+					</ul>
+				</div>
+			</div>
+		</section>
+
+		<section class="block flip" id="stats">
+			<div class="wrap">
+				<div class="media stats-art rv">
+					<div class="device"><div class="screen"><img src="assets/images/stats_1.png" alt="GymNerd statistics screen" /></div></div>
+					<img class="widget" src="assets/images/stats_widget_1.png" alt="Progress per muscle group" />
+					<img class="widget" src="assets/images/stats_widget_2.png" alt="Exercise weight progression chart" />
+				</div>
+				<div class="rv d1">
+					<h2 data-i18n="stats.title">Statistics</h2>
+					<p data-i18n="stats.body">Get a full overview of your progress.</p>
+					<ul>
+						<li data-i18n="stats.li1">Workout frequency</li>
+						<li data-i18n="stats.li2">Frequency by exercise type</li>
+						<li data-i18n="stats.li3">Progress by exercise type</li>
+						<li data-i18n="stats.li4">Progress for each exercise</li>
+					</ul>
+				</div>
+			</div>
+		</section>
+
+		<section class="block" id="measurements">
+			<div class="wrap">
+				<div class="media stats-art measure-art rv">
+					<div class="device"><div class="screen"><img src="assets/images/measurements.png" alt="GymNerd weight history screen" /></div></div>
+					<img class="widget" src="assets/images/measurements_widget_1.png" alt="Weight progress chart" />
+					<img class="widget" src="assets/images/measurements_widget_2.png" alt="Log weight with a scrolling ruler" />
+				</div>
+				<div class="rv d1">
+					<h2 data-i18n="measurements.title">Measurements</h2>
+					<p data-i18n="measurements.body">Track your body weight.</p>
+					<ul>
+						<li data-i18n="measurements.li1">Log your weight</li>
+						<li data-i18n="measurements.li2">Follow your weight progress</li>
+					</ul>
+				</div>
+			</div>
+		</section>
+
+		<section class="block flip" id="assistant">
+			<div class="wrap">
+				<div class="media stats-art assist-art rv">
+					<div class="device"><div class="screen"><img src="assets/images/assistant.png" alt="GymNerd onboarding goal screen" /></div></div>
+					<img class="widget" src="assets/images/assistant_widget_1.png" alt="Mascot motivating you to set a new record" />
+					<img class="widget" src="assets/images/assistant_widget_2.png" alt="Mascot telling you that you can do better" />
+				</div>
+				<div class="rv d1">
+					<h2 data-i18n="assistant.title">Assistant</h2>
+					<p data-i18n="assistant.body">A semi-intelligent assistant (not AI) to help you reach your goals.</p>
+					<ul>
+						<li data-i18n="assistant.li1">Get routine recommendations</li>
+						<li data-i18n="assistant.li2">Get status messages in different moods: encouraging, neutral or sassy</li>
+						<li data-i18n="assistant.li3">Get notified about "stale" exercises</li>
+					</ul>
+				</div>
+			</div>
+		</section>
+
+		<section class="closing" id="get">
+			<div class="wrap rv">
+				<img class="app-icon" src="assets/Play-App-Icon.svg" alt="GymNerd app icon" />
+				<h2 data-i18n="hero.mantra">If it doesn't cost us, it will be free for you!</h2>
+				<div class="badges">
+					<a href="#" class="badge" aria-label="Get it on Google Play"><img src="assets/Google_Play_Store_badge_EN.svg" alt="Get it on Google Play" /></a>
+					<!-- <a href="#" class="badge" aria-label="Download on the App Store"><img src="assets/Download_on_the_App_Store_Badge.svg" alt="Download on the App Store" /></a> -->
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<footer>
+		<div class="wrap">
+			<span>&copy; 2026 Luan Barbosa Gomes</span>
+			<span><a href="/gymnerd/privacy-policy.html" data-i18n="footer.privacy">Privacy policy</a> &nbsp;·&nbsp; <a href="../index.html">luanbarbosagomes.com</a></span>
+		</div>
+	</footer>
+
+	<dialog class="viewer" id="viewer" aria-label="Image viewer">
+		<div class="viewer-stage"></div>
+		<button type="button" class="close" aria-label="Close">&times;</button>
+		<button type="button" class="nav prev" aria-label="Previous image">&lsaquo;</button>
+		<button type="button" class="nav next" aria-label="Next image">&rsaquo;</button>
+		<div class="dots" aria-hidden="true"></div>
+	</dialog>
+
+	<script src="i18n.js"></script>
+	<script>
+		(function () {
+			/* fullscreen image viewer: flip through the images of the clicked section */
+			var viewer = document.getElementById("viewer");
+			if (viewer && viewer.showModal) {
+				var stage = viewer.querySelector(".viewer-stage");
+				var dots = viewer.querySelector(".dots");
+				var group = [], index = 0;
+
+				var build = function (img) {
+					var device = img.closest(".device");
+					var content;
+					if (device) {
+						/* keep the device frame and cropped screen */
+						content = device.cloneNode(true);
+						var inner = content.querySelector("img");
+						inner.removeAttribute("tabindex");
+						inner.removeAttribute("role");
+					} else {
+						content = document.createElement("img");
+						content.src = img.currentSrc || img.src;
+						content.alt = img.alt;
+						content.style.borderRadius = getComputedStyle(img).borderRadius;
+					}
+					return content;
+				};
+
+				var show = function (i, dir) {
+					index = (i + group.length) % group.length;
+					var content = build(group[index]);
+					stage.replaceChildren(content);
+					if (dir && content.animate) {
+						content.animate(
+							[{ opacity: 0, translate: (dir * 40) + "px 0" }, { opacity: 1, translate: "0 0" }],
+							{ duration: 260, easing: "cubic-bezier(.2, .8, .2, 1)" }
+						);
+					}
+					Array.prototype.forEach.call(dots.children, function (d, n) {
+						d.classList.toggle("on", n === index);
+					});
+				};
+
+				var open = function (img) {
+					group = Array.prototype.slice.call(img.closest(".media").querySelectorAll("img"));
+					dots.replaceChildren.apply(dots, group.map(function () { return document.createElement("i"); }));
+					viewer.classList.toggle("single", group.length < 2);
+					show(group.indexOf(img), 0);
+					viewer.showModal();
+				};
+
+				document.querySelectorAll(".block .media img").forEach(function (img) {
+					img.tabIndex = 0;
+					img.setAttribute("role", "button");
+					img.addEventListener("click", function () { open(img); });
+					img.addEventListener("keydown", function (e) {
+						if (e.key === "Enter" || e.key === " ") { e.preventDefault(); open(img); }
+					});
+				});
+
+				viewer.querySelector(".prev").addEventListener("click", function (e) { e.stopPropagation(); show(index - 1, -1); });
+				viewer.querySelector(".next").addEventListener("click", function (e) { e.stopPropagation(); show(index + 1, 1); });
+				viewer.addEventListener("keydown", function (e) {
+					if (group.length < 2) return;
+					if (e.key === "ArrowLeft") show(index - 1, -1);
+					if (e.key === "ArrowRight") show(index + 1, 1);
+				});
+
+				/* swipe */
+				var startX = null;
+				viewer.addEventListener("touchstart", function (e) { startX = e.touches[0].clientX; }, { passive: true });
+				viewer.addEventListener("touchend", function (e) {
+					if (startX === null || group.length < 2) return;
+					var dx = e.changedTouches[0].clientX - startX;
+					startX = null;
+					if (Math.abs(dx) > 50) { show(index + (dx < 0 ? 1 : -1), dx < 0 ? 1 : -1); }
+				}, { passive: true });
+
+				viewer.addEventListener("click", function () { viewer.close(); });
+			}
+
+			/* reveal on scroll */
+			var els = document.querySelectorAll(".rv");
+			if (!("IntersectionObserver" in window)) {
+				els.forEach(function (e) { e.classList.add("in"); });
+				return;
+			}
+			var io = new IntersectionObserver(function (entries) {
+				entries.forEach(function (e) {
+					if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
+				});
+			}, { threshold: .15, rootMargin: "0px 0px -40px 0px" });
+			els.forEach(function (e) { io.observe(e); });
+		})();
+	</script>
+
+</body>
+
+</html>
