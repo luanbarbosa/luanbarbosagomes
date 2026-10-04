@@ -17,8 +17,9 @@
   "everyday_use_2": "Serviços Firebase (Remote Config, Analytics, App distribution, etc.)",
   "everyday_use_3": "Organização de projetos (Jira, Confluence, Trello, Kanban, etc.)",
 
-  "gym_nerd_desc1": "Progressive Web App desenvolvido como um projeto pessoal para acompanhar treinos na academia",
-  "gym_nerd_desc2": "Este app foi desenvolvido com o uso de IA para melhor compreensão do desenvolvimento utilizando ferramentas como GitHub Copilot, Gemini, Codex, etc.",
+  "more_details": "Mais detalhes",
+  "gym_nerd_desc1": "App de acompanhamento de evolução nos exercícios, feito como projeto pessoal",
+  "gym_nerd_desc2": "Usando Kotlin Multiplatform, Compose Multiplatform, Coroutines, Flows, Datastore, Firebase Services, Koin, Claude Code, etc.",
 
   "sanoma_title": "Apps de notícias",
   "sanoma_desc1": "Desenvolvedor Android Sênior na equipe responsável por criar uma plataforma que gera 15+ apps distintos de notícias para as marcas da Sanoma Media Finland",
