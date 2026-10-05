@@ -59,6 +59,13 @@ document.addEventListener('DOMContentLoaded', function () {
         if (typeof href === 'undefined') return;
         el.setAttribute('href', href);
       });
+      document.querySelectorAll('[data-i18n-aria]').forEach(function (el) {
+        var label = translations[el.getAttribute('data-i18n-aria')];
+        if (typeof label !== 'undefined') el.setAttribute('aria-label', label);
+      });
+      var desc = document.querySelector('meta[name="description"]');
+      if (desc && translations.meta_description) desc.setAttribute('content', translations.meta_description);
+      document.documentElement.lang = lang === 'pt' ? 'pt-BR' : 'en';
       if (translations.title) document.title = translations.title;
       // ensure selector reflects current language after translations applied
       if (select) {

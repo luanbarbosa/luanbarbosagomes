@@ -219,7 +219,7 @@
       contact_title: "Contact Us",
       contact_p1: "If you have questions about this Privacy Policy, contact us at:"
     },
-    "pt-BR": {
+    pt: {
       title: "Política de Privacidade",
       updated: "Última atualização: 18 de setembro de 2026",
       intro: "A Not Bad Apps (\"nós\", \"nos\", \"nosso\") opera o aplicativo móvel GymNerd (o \"App\"). Esta Política de Privacidade explica quais informações coletamos, como as usamos e quais são os seus direitos em relação a elas.",
@@ -257,7 +257,7 @@
   var supported = ["en", "pt"];
 
   function applyLanguage(lang) {
-    var dict = translations[lang === "pt" ? "pt-BR" : "en"];
+    var dict = translations[lang];
     document.querySelectorAll("[data-i18n]").forEach(function (el) {
       var key = el.getAttribute("data-i18n");
       if (dict[key]) el.textContent = dict[key];
