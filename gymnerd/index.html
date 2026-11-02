@@ -167,6 +167,11 @@
 		.badge {
 			position: relative;
 			display: inline-flex;
+			transition: transform .2s var(--ease);
+		}
+
+		a.badge:hover {
+			transform: translateY(-2px);
 		}
 
 		.badge-soon {
@@ -185,9 +190,12 @@
 			pointer-events: none;
 		}
 
-		.badge img {
+		.badge-disabled img {
 			opacity: .55;
 			filter: grayscale(.6);
+		}
+
+		.badge img {
 			display: block;
 			height: 48px;
 			width: auto;
@@ -391,7 +399,7 @@
 		/* simple 2D device frame; the frame carries tilt, shadow, fade and hover */
 		.device {
 			--bezel: clamp(3px, .9vw, 9px);
-			--corner: clamp(16px, 3.6vw, 40px);
+			--corner: clamp(11px, 2.4vw, 26px);
 			flex: 1 1 0;
 			min-width: 0;
 			position: relative;
@@ -580,7 +588,7 @@
 		/* framed screenshot in the viewer: same frame + cropped screen, sized to the viewport */
 		.viewer .device {
 			--bezel: 10px;
-			--corner: 46px;
+			--corner: 30px;
 			--gap: 28px; /* same inset as the close button */
 			--screen-h: min(calc(100vh - 2 * var(--gap) - var(--nav-y) - 2 * var(--bezel) - 3px), calc((100vw - 2 * var(--nav-x) - 2 * var(--bezel) - 3px) * 2636 / 1280));
 			flex: none;
@@ -1118,8 +1126,8 @@
 						<p class="mantra" data-i18n="hero.mantra">If it doesn't cost us, it will be <em>free for you</em>!</p>
 					</div>
 					<div class="badges">
-						<div class="badge" role="img" aria-label="Get it on Google Play" data-i18n-aria="alt.play"><img src="assets/Google_Play_Store_badge_EN.svg" alt="Get it on Google Play" data-i18n-alt="alt.play" /><span class="badge-soon" data-i18n="badge.soon">Soon</span></div>
-						<div class="badge" role="img" aria-label="Download on the App Store" data-i18n-aria="alt.appstore"><img src="assets/Download_on_the_App_Store_Badge.svg" alt="Download on the App Store" data-i18n-alt="alt.appstore" /><span class="badge-soon" data-i18n="badge.soon">Soon</span></div>
+						<a href="https://play.google.com/store/apps/details?id=com.gymnerd.app" target="_blank" rel="noopener" class="badge" aria-label="Get it on Google Play" data-i18n-aria="alt.play"><img src="assets/Google_Play_Store_badge_EN.svg" alt="Get it on Google Play" data-i18n-alt="alt.play" /></a>
+						<div class="badge badge-disabled" role="img" aria-label="Download on the App Store" data-i18n-aria="alt.appstore"><img src="assets/Download_on_the_App_Store_Badge.svg" alt="Download on the App Store" data-i18n-alt="alt.appstore" /><span class="badge-soon" data-i18n="badge.soon">Soon</span></div>
 					</div>
 				</div>
 
@@ -1253,8 +1261,8 @@
 				<img class="app-icon" src="assets/Play-App-Icon.svg" alt="GymNerd app icon" data-i18n-alt="alt.icon" />
 				<h2 data-i18n="hero.mantra">If it doesn't cost us, it will be <em>free for you</em>!</h2>
 				<div class="badges">
-					<div class="badge" role="img" aria-label="Get it on Google Play" data-i18n-aria="alt.play"><img src="assets/Google_Play_Store_badge_EN.svg" alt="Get it on Google Play" data-i18n-alt="alt.play" /><span class="badge-soon" data-i18n="badge.soon">Soon</span></div>
-					<div class="badge" role="img" aria-label="Download on the App Store" data-i18n-aria="alt.appstore"><img src="assets/Download_on_the_App_Store_Badge.svg" alt="Download on the App Store" data-i18n-alt="alt.appstore" /><span class="badge-soon" data-i18n="badge.soon">Soon</span></div>
+					<a href="https://play.google.com/store/apps/details?id=com.gymnerd.app" target="_blank" rel="noopener" class="badge" aria-label="Get it on Google Play" data-i18n-aria="alt.play"><img src="assets/Google_Play_Store_badge_EN.svg" alt="Get it on Google Play" data-i18n-alt="alt.play" /></a>
+					<div class="badge badge-disabled" role="img" aria-label="Download on the App Store" data-i18n-aria="alt.appstore"><img src="assets/Download_on_the_App_Store_Badge.svg" alt="Download on the App Store" data-i18n-alt="alt.appstore" /><span class="badge-soon" data-i18n="badge.soon">Soon</span></div>
 				</div>
 			</div>
 		</section>
